@@ -8,21 +8,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema crustaceocascarudo
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema crustaceocascarudo
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `crustaceocascarudo` DEFAULT CHARACTER SET utf8 ;
+USE `crustaceocascarudo` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`sexo`
+-- Table `crustaceocascarudo`.`sexo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`sexo` ;
+DROP TABLE IF EXISTS `crustaceocascarudo`.`sexo` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`sexo` (
+CREATE TABLE IF NOT EXISTS `crustaceocascarudo`.`sexo` (
   `id_sexo` INT NOT NULL AUTO_INCREMENT,
   `sexo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_sexo`))
@@ -30,11 +30,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`cargo`
+-- Table `crustaceocascarudo`.`cargo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`cargo` ;
+DROP TABLE IF EXISTS `crustaceocascarudo`.`cargo` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`cargo` (
+CREATE TABLE IF NOT EXISTS `crustaceocascarudo`.`cargo` (
   `id_cargo` INT NOT NULL AUTO_INCREMENT,
   `cargo` VARCHAR(45) NOT NULL,
   `salario` VARCHAR(45) NOT NULL,
@@ -43,11 +43,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`empleado`
+-- Table `crustaceocascarudo`.`empleado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`empleado` ;
+DROP TABLE IF EXISTS `crustaceocascarudo`.`empleado` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`empleado` (
+CREATE TABLE IF NOT EXISTS `crustaceocascarudo`.`empleado` (
   `id_empleado` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `apellido` VARCHAR(45) NOT NULL,
@@ -62,12 +62,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`empleado` (
   INDEX `fk_empleado_cargo1_idx` (`id_cargo` ASC),
   CONSTRAINT `fk_empleado_sexo`
     FOREIGN KEY (`id_sexo`)
-    REFERENCES `mydb`.`sexo` (`id_sexo`)
+    REFERENCES `crustaceocascarudo`.`sexo` (`id_sexo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_empleado_cargo1`
     FOREIGN KEY (`id_cargo`)
-    REFERENCES `mydb`.`cargo` (`id_cargo`)
+    REFERENCES `crustaceocascarudo`.`cargo` (`id_cargo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
