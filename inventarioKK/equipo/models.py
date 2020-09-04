@@ -33,7 +33,7 @@ class Ubicacion(models.Model):
     id_edificio = models.ForeignKey(Edificio, on_delete=models.CASCADE, db_column='id_edificio')
 
 
-     class Meta:
+    class Meta:
         managed = True
         db_table = 'ubicacion'
         unique_together = (('id_ubicacion', 'id_edificio'),)
@@ -43,7 +43,7 @@ class EstadoEquipo(models.Model):
     id_estado_equipo = models.AutoField(primary_key=True)
     nombre_estado_equipo = models.CharField(max_length=45)
 
-        class Meta:
+    class Meta:
         managed = True
         db_table = 'estado_equipo'
 
