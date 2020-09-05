@@ -35,6 +35,41 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='Edificio',
+            fields=[
+                ('id_edificio', models.AutoField(primary_key=True, serialize=False)),
+                ('nombre_edificio', models.CharField(max_length=45)),
+            ],
+            options={
+                'db_table': 'edificio',
+                'managed': True,
+            },
+        ),
+        migrations.CreateModel(
+            name='Ubicacion',
+            fields=[
+                ('id_ubicacion', models.AutoField(primary_key=True, serialize=False)),
+                ('nombre_ubicacion', models.CharField(max_length=45)),
+                ('id_edificio', models.ForeignKey(db_column='id_edificio', on_delete=django.db.models.deletion.CASCADE, to='equipo.Edificio')),
+            ],
+            options={
+                'unique_together': {('id_ubicacion', 'id_edificio')},
+                'db_table': 'ubicacion',
+                'managed': True,
+            },
+        ),
+        migrations.CreateModel(
+            name='EstadoEquipo',
+            fields=[
+                ('id_estado_equipo', models.AutoField(primary_key=True, serialize=False)),
+                ('nombre_estado_equipo', models.CharField(max_length=45)),
+            ],
+            options={
+                'db_table': 'estado_equipo',
+                'managed': True,
+            },
+        ),
+        migrations.CreateModel(
             name='Equipo',
             fields=[
                 ('id_equipo', models.AutoField(primary_key=True, serialize=False)),
