@@ -36,6 +36,17 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='EstadoEmpleado',
+            fields=[
+                ('id_estado_empleado', models.AutoField(primary_key=True, serialize=False)),
+                ('nombre_estado_empleado', models.CharField(max_length=45)),
+            ],
+            options={
+                'managed': True,
+                'db_table': 'estado_empleado',
+            },
+        ),
+        migrations.CreateModel(
             name='Empleado',
             fields=[
                 ('id_empleado', models.AutoField(primary_key=True, serialize=False)),

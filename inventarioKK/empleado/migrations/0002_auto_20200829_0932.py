@@ -15,4 +15,9 @@ class Migration(migrations.Migration):
             old_name='cargo',
             new_name='nombre_cargo',
         ),
+        migrations.RenameField(
+            model_name='sexo',
+            old_name='sexo',
+            new_name='nombre_sexo',
+        ),
     ]
