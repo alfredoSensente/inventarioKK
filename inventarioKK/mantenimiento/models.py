@@ -12,6 +12,9 @@ class Mantenimiento(models.Model):
         managed = True
         db_table = 'mantenimiento'
 
+    def __str__(self):
+        return str(self.id_mantenimiento)
+
 
 class TipoCorrectivo(models.Model):
     """Modelo del tipo de correctivo"""
@@ -21,6 +24,9 @@ class TipoCorrectivo(models.Model):
     class Meta:
         managed = True
         db_table = 'tipo_correctivo'
+
+    def __str__(self):
+        return self.nombre_tipo_correctivo
 
 
 class Correctivo(models.Model):
@@ -38,6 +44,9 @@ class Correctivo(models.Model):
         managed = True
         db_table = 'correctivo'
         unique_together = (('id_correctivo', 'id_tipo_correctivo','id_mantenimiento'),)
+    
+    def __str__(self):
+        return str(self.id_correctivo) + " - " + str(self.fecha_correctivo)
 
 
 class MetodoPreventivo(models.Model):
@@ -48,6 +57,9 @@ class MetodoPreventivo(models.Model):
     class Meta:
         managed = True
         db_table = 'metodo_preventivo'
+    
+    def __str__(self):
+        return self.nombre_metodo_preventivo
 
 
 class TipoPreventivo(models.Model):
@@ -60,6 +72,9 @@ class TipoPreventivo(models.Model):
     class Meta:
         managed = True
         db_table = 'tipo_preventivo'
+
+    def __str__(self):
+        return self.nombre_tipo_preventivo
 
 
 class Preventivo(models.Model):
@@ -75,6 +90,9 @@ class Preventivo(models.Model):
         managed = True
         db_table = 'preventivo'
 
+    def __str__(self):
+        return str(self.id_preventivo) + " - " + str(self.fecha_preventivo)
+
 
 class Innovativo(models.Model):
     """Modelo para mantenimiento innovativo"""
@@ -87,3 +105,6 @@ class Innovativo(models.Model):
     class Meta:
         managed = True
         db_table = 'innovativo'
+
+    def __str__(self):
+        return str(self.id_innovativo) + " - " + str(self.fecha_innovativo)
