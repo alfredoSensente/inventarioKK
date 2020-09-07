@@ -9,6 +9,9 @@ class Marca(models.Model):
         managed = True
         db_table = 'marca'
 
+    def __str__(self):
+        return str(self.nombre_marca)
+
 class TipoEquipo(models.Model):
     id_tipo_equipo = models.AutoField(primary_key=True)
     nombre_tipo_equipo = models.CharField(max_length=45)
@@ -16,6 +19,9 @@ class TipoEquipo(models.Model):
     class Meta:
         managed = True
         db_table = 'tipo_equipo'
+
+    def __str__(self):
+        return str(self.nombre_tipo_equipo)
 
 
 class Edificio(models.Model):
@@ -26,6 +32,9 @@ class Edificio(models.Model):
         managed = True
         db_table = 'edificio'
 
+
+    def __str__(self):
+        return str(self.nombre_edificio)
 
 class Ubicacion(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
@@ -38,6 +47,9 @@ class Ubicacion(models.Model):
         db_table = 'ubicacion'
         unique_together = (('id_ubicacion', 'id_edificio'),)
 
+    def __str__(self):
+        return str(self.nombre_ubicacion)
+
 
 class EstadoEquipo(models.Model):
     id_estado_equipo = models.AutoField(primary_key=True)
@@ -46,6 +58,9 @@ class EstadoEquipo(models.Model):
     class Meta:
         managed = True
         db_table = 'estado_equipo'
+
+    def __str__(self):
+        return str(self.nombre_estado_equipo)
 
 
 class Equipo(models.Model):
@@ -61,4 +76,6 @@ class Equipo(models.Model):
         db_table = 'equipo'
         unique_together = (('id_equipo', 'id_tipo_equipo','id_marca','id_estado_equipo','id_ubicacion'),)
 
+    def __str__(self):
+        return str(self.id_equipo)
 
