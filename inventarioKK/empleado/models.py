@@ -12,6 +12,10 @@ class Cargo(models.Model):
         managed = True
         db_table = 'cargo'
 
+    def __str__(self):
+        return self.nombre_cargo
+
+
 class Sexo(models.Model):
     id_sexo = models.AutoField(primary_key=True)
     nombre_sexo = models.CharField(max_length=45)
@@ -20,6 +24,9 @@ class Sexo(models.Model):
         managed = True
         db_table = 'sexo'
 
+    def __str__(self):
+        return self.nombre_sexo
+
 class EstadoEmpleado(models.Model):
     id_estado_empleado = models.AutoField(primary_key=True)
     nombre_estado_empleado = models.CharField(max_length=45)
@@ -27,6 +34,9 @@ class EstadoEmpleado(models.Model):
     class Meta:
         managed = True
         db_table = 'estado_empleado'
+
+    def __str__(self):
+        return self.nombre_estado_empleado
 
 
 class Empleado(models.Model):
@@ -47,6 +57,9 @@ class Empleado(models.Model):
         db_table = 'empleado'
         unique_together = (('id_empleado', 'id_cargo', 'id_sexo'),)
 
+    def __str__(self):
+        return str(self.id_empleado) + " - " + self.nombre
+
 
 class EmpleadoPorMantenimiento(models.Model):
     id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
@@ -57,3 +70,8 @@ class EmpleadoPorMantenimiento(models.Model):
         managed = True
         db_table = 'empleado_por_mantenimiento'
         unique_together = (('id_empleado', 'id_mantenimiento'),)
+
+    def __str__(self):
+        return str(self.id_empleado) + " - " + str(self.id_mantenimiento)
+
+        
