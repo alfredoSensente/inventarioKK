@@ -49,7 +49,6 @@ class Empleado(models.Model):
 
 
 class EmpleadoPorMantenimiento(models.Model):
-    id_empleado_por_mantenimiento = models.AutoField(primary_key=True)
     id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
     id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE, db_column='id_mantenimiento')
 
@@ -57,4 +56,4 @@ class EmpleadoPorMantenimiento(models.Model):
     class Meta:
         managed = True
         db_table = 'empleado_por_mantenimiento'
-        unique_together = (('id_empleado_por_mantenimiento', 'id_empleado', 'id_mantenimiento'),)
+        unique_together = (('id_empleado', 'id_mantenimiento'),)

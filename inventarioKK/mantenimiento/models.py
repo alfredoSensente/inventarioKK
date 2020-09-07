@@ -43,8 +43,8 @@ class Correctivo(models.Model):
     class Meta:
         managed = True
         db_table = 'correctivo'
-        unique_together = (('id_correctivo', 'id_tipo_correctivo','id_mantenimiento'),)
-    
+        unique_together = (('id_correctivo', 'id_tipo_correctivo', 'id_mantenimiento'),)
+
     def __str__(self):
         return str(self.id_correctivo) + " - " + str(self.fecha_correctivo)
 
@@ -57,7 +57,7 @@ class MetodoPreventivo(models.Model):
     class Meta:
         managed = True
         db_table = 'metodo_preventivo'
-    
+
     def __str__(self):
         return self.nombre_metodo_preventivo
 

@@ -9,6 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('mantenimiento', '__first__'),
+        ('equipo', '__first__'),
     ]
 
     operations = [
@@ -56,13 +58,27 @@ class Migration(migrations.Migration):
                 ('dui', models.CharField(max_length=10)),
                 ('nit', models.CharField(max_length=17)),
                 ('telefono_fijo', models.CharField(blank=True, max_length=9, null=True)),
+                ('id_estado_empleado', models.ForeignKey(db_column='id_estado_empleado', on_delete=django.db.models.deletion.DO_NOTHING, to='empleado.EstadoEmpleado')),
                 ('id_cargo', models.ForeignKey(db_column='id_cargo', on_delete=django.db.models.deletion.DO_NOTHING, to='empleado.Cargo')),
                 ('id_sexo', models.ForeignKey(db_column='id_sexo', on_delete=django.db.models.deletion.DO_NOTHING, to='empleado.Sexo')),
+                ('id_ubicacion', models.ForeignKey(db_column='id_ubicacion', on_delete=django.db.models.deletion.DO_NOTHING, to='equipo.Ubicacion')),
             ],
             options={
                 'unique_together': {('id_empleado', 'id_cargo', 'id_sexo')},
                 'managed': True,
                 'db_table': 'empleado',
+            },
+        ),
+        migrations.CreateModel(
+            name='EmpleadoPorMantenimiento',
+            fields=[
+                ('id_empleado', models.ForeignKey(db_column='id_empleado', on_delete=django.db.models.deletion.DO_NOTHING, to='empleado.Empleado')),
+                ('id_mantenimiento', models.ForeignKey(db_column='id_mantenimiento', on_delete=django.db.models.deletion.DO_NOTHING, to='mantenimiento.Mantenimiento')),
+            ],
+            options={
+                'unique_together': {('id_empleado', 'id_mantenimiento')},
+                'managed': True,
+                'db_table': 'empleado_por_mantenimiento',
             },
         ),
     ]
