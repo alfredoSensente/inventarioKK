@@ -1,0 +1,33 @@
+{% extends "layout_base.html"%}
+{% block title %}equipo{% endblock %}
+{% block body %}
+<div class = 'container'>
+    <h1 class="text-center">TABLA DE EQUIPOS EN EXISTENCIA</h1>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">N° REGISTRO</th>
+            <th scope="col">MARCA</th>
+            <th scope="col">TIPO DE EQUIPO</th>
+            <th scope="col">UBICACION</th>
+            <th scope="col">EDIFICIO</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% if lista_equipo %}
+            {% for tablaequipo in lista_equipo %}
+          <tr>
+            <th scope="row">{{tablaequipo.id_equipo}}</th>
+            <td>{{tablaequipo.id_marca}}</td>
+            <td>{{tablaequipo.id_tipo_equipo}}</td>
+            <td>{{tablaequipo.id_ubicacion}}</td>
+            <td>{{tablaequipo.id_ubicacion.id_edificio}}</td>
+          </tr>
+          {% endfor %}
+    {% else %}
+    <p>No hay registros de equipo</p>
+    {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
