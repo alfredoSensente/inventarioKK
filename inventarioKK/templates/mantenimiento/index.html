@@ -1,5 +1,13 @@
 {% extends "layout_base.html"%}
 {% block title %}Mantenimiento{% endblock %}
 {% block body %}
-    <h1>Hola Mundo</h1>
+    <div class="container">
+        <ul>
+        {% if listado_mantenimiento %}
+            {% for mante in listado_mantenimiento %}
+            <li><a href="{% url 'mantenimiento:descripcion' mante.id_mantenimiento %}">#{{ mante.id_mantenimiento }}</a></li>
+            {% endfor %}
+        {% endif %}
+        </ul>
+    </div>
 {% endblock %}
