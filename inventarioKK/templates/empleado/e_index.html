@@ -1,0 +1,17 @@
+{% extends "layout_base.html"%}
+{% block title %}Empleado{% endblock %}
+{% block body %}
+<div class="container">
+    <h1>Lista de Empleados Cachondos</h1>
+    <h3>{% if latest_empleado_list %}
+        <ul>
+        {% for Empleado in latest_empleado_list %}
+            <li><a href="{% url 'empleado:des_em' Empleado.id_empleado %}">*{{ Empleado.nombre }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>cagaste.</p>
+    {% endif %}
+    </h3>
+</div>
+{% endblock %}
