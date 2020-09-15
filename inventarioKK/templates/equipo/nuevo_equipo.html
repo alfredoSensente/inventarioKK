@@ -1,0 +1,70 @@
+{% extends 'layout_base.html' %}
+{% block title %}Nuevo Equipo{% endblock %}
+{% block body %}
+    <div class="container margen-arriba">
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <!-- titlulo del form -->
+            <div class="form-group">
+                <h1>Agregar o Editar equipo</h1>
+            </div>
+            <!-- tipo equipo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_tipo_equipo">Tipo equipo:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.id_tipo_equipo}}
+                    </div>
+                </div>
+            </div>
+            <!-- marca -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_marca">Marca:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.id_marca }}
+                    </div>
+                </div>
+            </div>
+            <!-- estado equipo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_estado_equipo">Estado Equipo:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.id_estado_equipo }}
+                    </div>
+                </div>
+            </div>
+            <!-- ubicacion -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_ubicacion">Ubicacion:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.id_ubicacion }}
+                    </div>
+                </div>
+            </div>
+            <!-- Descripcion -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Descripcion:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.descripcion }}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+        </form>
+    </div>
+{% endblock %}
