@@ -1,4 +1,4 @@
-{% extends 'layout_base.html' %}
+{% extends 'equipo/layout_base_equipo.html' %}
 {% block title %}Nuevo Equipo{% endblock %}
 {% block body %}
     <div class="container margen-arriba">
@@ -64,7 +64,11 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+            <div class="row justify-content-md-center margen-arriba">
+                <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+                <button class="button button1"><a href="{% url 'equipo:lista_de_equipos' %}" style="color:white">Cancelar</a></button>
+                <button type="reset" class="button button2" value="Resetear">Reiniciar</button>
+            </div>
         </form>
     </div>
 {% endblock %}

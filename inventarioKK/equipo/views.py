@@ -12,9 +12,14 @@ class ListaDeEquipos(generic.ListView):
     model = Equipo
    
 class EquipoCreate(generic.CreateView):
-    """Crear un nuevo paciente"""
+    """Crear un nuevo equipo"""
     model = Equipo
     form_class = EquipoForm
     template_name = 'equipo/nuevo_equipo.html'
     success_url = reverse_lazy('equipo:lista_de_equipos')
 
+class DescripcionEquipo(generic.DetailView):
+    """Muestra una descripcion de cada Equipo"""
+    template_name = 'equipo/descripcion_equipo.html'
+    context_object_name = 'descripcion_equipo'
+    model = Equipo

@@ -1,5 +1,5 @@
-{% extends "layout_base.html"%}
-{% block title %}equipo{% endblock %}
+{% extends "equipo/layout_base_equipo.html"%}
+{% block title %}Equipo{% endblock %}
 {% block body %}
 <div class = 'container'>
     <h1 class="text-center">TABLA DE EQUIPOS EN EXISTENCIA</h1>
@@ -11,6 +11,7 @@
             <th scope="col">TIPO DE EQUIPO</th>
             <th scope="col">UBICACION</th>
             <th scope="col">EDIFICIO</th>
+            <th scope="col">DETALLE DEL EQUIPO</th>
           </tr>
         </thead>
         <tbody>
@@ -22,6 +23,8 @@
             <td>{{tablaequipo.id_tipo_equipo}}</td>
             <td>{{tablaequipo.id_ubicacion}}</td>
             <td>{{tablaequipo.id_ubicacion.id_edificio}}</td>
+            <td><a href="{% url 'equipo:des_equipo' tablaequipo.id_equipo %}">Resumen</a>
+            </td>
           </tr>
           {% endfor %}
     {% else %}
@@ -29,5 +32,7 @@
     {% endif %}
         </tbody>
     </table>
+      <div class="row justify-content-md-center">
+        <button class="button button2 "><a href="{% url 'equipo:nuevo_equipo' %}" style="color:white">Agregar Equipo</a></button>
 </div>
 {% endblock %}

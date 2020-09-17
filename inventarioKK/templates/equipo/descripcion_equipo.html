@@ -1,0 +1,16 @@
+{% extends "equipo/layout_base_equipo.html"%}
+{% block title %}Descripcion{% endblock %}
+{% block body %}
+    <div class="container">
+    {% if descripcion_equipo %}
+        <h1>Id: {{descripcion_equipo.id_equipo}}</h1>
+        <h3>Tipo de equipo: {{descripcion_equipo.id_tipo_equipo}}</h3>
+        <h3>Marca: {{descripcion_equipo.id_marca}}</h3>
+        <h3>Estado del equipo: {{descripcion_equipo.id_estado_equipo}}</h3>
+        <h3>Descripcion: {{descripcion_equipo.descripcion}}</h3>
+        <h3>Ubicación: {{descripcion_equipo.id_ubicacion}}</h3>
+    {% else %}
+        <h3>No hay equipos!</h3>
+    {% endif %}
+    </div>
+{% endblock %}
