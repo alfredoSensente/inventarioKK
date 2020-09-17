@@ -1,0 +1,16 @@
+{% extends 'empleado/layout_base_empleado.html' %}
+{% block title %}Nuevo Empleado{% endblock %}
+{% block body %}
+    <div class="container margen-arriba">
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <p><br></p>
+            <div class="row justify-content-md-center">
+            <button type="submit" class="button button2" value="Agregar">Guardar</button>
+            <button class="button button1"><a href="{% url 'empleado:mensaje_empleado' %}" style="color:white">Cancelar</a></button>
+            <button type="reset" class="button button2" value="Resetear">Reiniciar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,14 +1,19 @@
-{% extends "layout_base.html"%}
+{% extends "empleado/layout_base_empleado.html"%}
 {% block title %}Descripcion{% endblock %}
 {% block body %}
     <div class="container">
     {% if descripcion_empleado %}
         <h3>Nombre: {{descripcion_empleado.nombre}}</h3>
         <h3>Apellido: {{descripcion_empleado.apellido}}</h3>
+        <h3>Código de Empleado: {{descripcion_empleado.id_empleado}}</h3>
         <h3>Fecha de Nacimiento: {{descripcion_empleado.fecha_nacimiento}}</h3>
         <h3>Cargo: {{descripcion_empleado.id_cargo}}</h3>
         <h3>Sexo: {{descripcion_empleado.id_sexo}}</h3>
+        <h3>DUI: {{descripcion_empleado.dui}}</h3>
+        <h3>NIT: {{descripcion_empleado.nit}}</h3>
+        <h3>Teléfono Fijo: {{descripcion_empleado.telefono_fijo}}</h3>
         <h3>Estado: {{descripcion_empleado.id_estado_empleado}}</h3>
+        <h3>Ubicación: {{descripcion_empleado.id_ubicacion}}</h3>
 
     {% else %}
         <h3>No hay empleados!</h3>

@@ -1,17 +1,39 @@
-{% extends "layout_base.html"%}
+{% extends "empleado/layout_base_empleado.html"%}
 {% block title %}Empleado{% endblock %}
 {% block body %}
 <div class="container">
-    <h1>Lista de Empleados Cachondos</h1>
-    <h3>{% if latest_empleado_list %}
-        <ul>
-        {% for Empleado in latest_empleado_list %}
-            <li><a href="{% url 'empleado:des_em' Empleado.id_empleado %}">*{{ Empleado.nombre }}</a></li>
-        {% endfor %}
-        </ul>
+    <h1 class="text-center">Tabla de Empleados</h1>
+    <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Edificio</th>
+            <th scope="col">Detalles</th>
+          </tr>
+        </thead>
+        <tbody>
+    {% if lista_empleado %}
+            {% for tablaempleado in lista_empleado %}
+            <tr>
+             <th scope="row">{{tablaempleado.id_empleado}}</th>
+             <td>{{tablaempleado.nombre}}</td>
+             <td>{{tablaempleado.apellido}}</td>
+             <td>{{tablaempleado.id_ubicacion}}</td>
+             <td>{{tablaempleado.id_ubicacion.id_edificio}}</td>
+             <td><a href="{% url 'empleado:des_em' tablaempleado.id_empleado %}">Puchame</a>
+             </td>
+            </tr>
+            {% endfor %}
     {% else %}
-        <p>cagaste.</p>
+        <p>No hay empleados registrados</p>
     {% endif %}
-    </h3>
+        </tbody>
+    </table>
+     <div class="row justify-content-md-center">
+        <button class="button button2 "><a href="{% url 'empleado:nuevo_empleado' %}" style="color:white">Agregar Empleado</a></button>
+     </div>
 </div>
 {% endblock %}

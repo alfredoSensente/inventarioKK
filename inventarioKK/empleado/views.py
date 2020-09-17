@@ -1,15 +1,29 @@
-from django.shortcuts import render, get_object_or_404
+"""Vistas de la Aplicacion Empleado"""
+
+from django.urls import reverse_lazy
+"""Vistas de la App Empleado"""
+from django.views import generic
 from .models import Empleado
+from .forms import EmpleadoForm
+
 
 # Create your views here.
-def mensaje_empleado(request):
-    """Muestra la template de Mensaje Empleado"""
-    latest_empleado_list = Empleado.objects.all()
-    context = {'latest_empleado_list': latest_empleado_list}
-    return render(request, 'empleado/e_index.html', context)
+class Indice(generic.ListView):
+    """Vista Genèrica de Tabla de Empleados"""
+    template_name = 'empleado/e_index.html'
+    context_object_name = 'lista_empleado'
+    model = Empleado
 
-def descripcion_empleado(request, id_empleado):
-    """Muestra la descripcion de un Empleado"""
-    descripcion_empleado = get_object_or_404(Empleado, pk=id_empleado)
-    context = {'descripcion_empleado': descripcion_empleado}
-    return render(request, 'empleado/descripcion_e.html', context)
+class DescripcionEmpleado(generic.DetailView):
+    """Muestra una descripcion de cada Empleado"""
+    template_name = 'empleado/descripcion_e.html'
+    context_object_name = 'descripcion_empleado'
+    model = Empleado
+
+class CrearEmpleado(generic.CreateView):
+    """Muestra el formulario para crear un nuevo Empleado"""
+    model = Empleado
+    form_class = EmpleadoForm
+    template_name = 'empleado/nuevo_empleado.html'
+    success_url = reverse_lazy('empleado:mensaje_empleado')
+
