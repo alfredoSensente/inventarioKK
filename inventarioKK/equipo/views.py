@@ -23,3 +23,10 @@ class DescripcionEquipo(generic.DetailView):
     template_name = 'equipo/descripcion_equipo.html'
     context_object_name = 'descripcion_equipo'
     model = Equipo
+
+class EquipoUpdate(generic.UpdateView):
+    """Actualiza el registro de un equipo"""
+    model = Equipo
+    form_class = EquipoForm
+    template_name = 'equipo/nuevo_equipo.html'
+    success_url = reverse_lazy('equipo:lista_de_equipos')

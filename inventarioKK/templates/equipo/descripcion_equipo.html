@@ -9,6 +9,9 @@
         <h3>Estado del equipo: {{descripcion_equipo.id_estado_equipo}}</h3>
         <h3>Descripcion: {{descripcion_equipo.descripcion}}</h3>
         <h3>Ubicación: {{descripcion_equipo.id_ubicacion}}</h3>
+        <div class="row justify-content-md-center">
+            <button class="button button2 "><a href="{% url 'equipo:lista_de_equipos' %}" style="color: white;">Regresar</a></button>
+        </div>
     {% else %}
         <h3>No hay equipos!</h3>
     {% endif %}

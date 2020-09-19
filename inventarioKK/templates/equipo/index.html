@@ -1,9 +1,10 @@
 {% extends "equipo/layout_base_equipo.html"%}
+{% load static %}
 {% block title %}Equipo{% endblock %}
 {% block body %}
 <div class = 'container'>
     <h1 class="text-center">TABLA DE EQUIPOS EN EXISTENCIA</h1>
-    <table class="table table-dark">
+    <table class="table table-dark text-center">
         <thead>
           <tr>
             <th scope="col">N° REGISTRO</th>
@@ -16,7 +17,7 @@
         </thead>
         <tbody>
     {% if lista_equipo %}
-            {% for tablaequipo in lista_equipo %}
+          {% for tablaequipo in lista_equipo %}
           <tr>
             <th scope="row">{{tablaequipo.id_equipo}}</th>
             <td>{{tablaequipo.id_marca}}</td>
@@ -24,6 +25,7 @@
             <td>{{tablaequipo.id_ubicacion}}</td>
             <td>{{tablaequipo.id_ubicacion.id_edificio}}</td>
             <td><a href="{% url 'equipo:des_equipo' tablaequipo.id_equipo %}">Resumen</a>
+                <a href="{% url 'equipo:editar_equipo' tablaequipo.id_equipo %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
             </td>
           </tr>
           {% endfor %}
