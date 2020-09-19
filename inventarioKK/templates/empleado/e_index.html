@@ -1,9 +1,10 @@
 {% extends "empleado/layout_base_empleado.html"%}
 {% block title %}Empleado{% endblock %}
+{% load static %}
 {% block body %}
 <div class="container">
     <h1 class="text-center">Tabla de Empleados</h1>
-    <table class="table table-dark">
+    <table class="table table-bordered table-hover table-dark">
         <thead>
           <tr>
             <th scope="col">Código</th>
@@ -23,7 +24,10 @@
              <td>{{tablaempleado.apellido}}</td>
              <td>{{tablaempleado.id_ubicacion}}</td>
              <td>{{tablaempleado.id_ubicacion.id_edificio}}</td>
-             <td><a href="{% url 'empleado:des_em' tablaempleado.id_empleado %}">Puchame</a>
+             <td><a href="{% url 'empleado:des_em' tablaempleado.id_empleado %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+                 <a href="{% url 'empleado:editar_empleado' tablaempleado.id_empleado %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+                 <a href="{% url 'empleado:eliminar_empleado' tablaempleado.id_empleado %}"><img src="{% static 'bootstrap/icons/trash.svg' %}" alt="My image" width="30px"></a>
+
              </td>
             </tr>
             {% endfor %}
@@ -35,5 +39,5 @@
      <div class="row justify-content-md-center">
         <button class="button button2 "><a href="{% url 'empleado:nuevo_empleado' %}" style="color:white">Agregar Empleado</a></button>
      </div>
-</div>
+    </div>
 {% endblock %}
