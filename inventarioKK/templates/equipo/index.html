@@ -24,7 +24,7 @@
             <td>{{tablaequipo.id_tipo_equipo}}</td>
             <td>{{tablaequipo.id_ubicacion}}</td>
             <td>{{tablaequipo.id_ubicacion.id_edificio}}</td>
-            <td><a href="{% url 'equipo:des_equipo' tablaequipo.id_equipo %}">Resumen</a>
+            <td><a href="{% url 'equipo:des_equipo' tablaequipo.id_equipo %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
                 <a href="{% url 'equipo:editar_equipo' tablaequipo.id_equipo %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
             </td>
           </tr>
