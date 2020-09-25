@@ -1,0 +1,11 @@
+{% extends "mantenimiento/layout_base_mantenimiento.html"%}
+{% block title %}Mantenimiento{% endblock %}
+{% block body %}
+    <div class="container margen-arriba">
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+        </form>
+    </div>
+    {% endblock %}
