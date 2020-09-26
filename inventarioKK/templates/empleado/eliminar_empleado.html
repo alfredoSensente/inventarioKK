@@ -1,0 +1,24 @@
+{% extends 'empleado/layout_base_empleado.html' %}
+{% block title %}Eliminar Empleado >:){% endblock %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <form method="POST">
+            {% csrf_token %}
+            <h3><strong>¿Borrar de forma permanente a éste empleado? {{ descripcion_empleado.nombre }}?</strong></h3>
+            <!--<p>Esta acción causara la eliminación de otros registro relacionados.</p>
+            {% if paciente_seleccionado.familiar_set.all %}
+            <h5><strong>Familiares que serán eliminados:</strong></h5>
+            <ul>
+            {% for familiar in paciente_seleccionado.familiar_set.all %}
+                <li>{{familiar.nombre}}</li>
+            {% endfor %}    
+            </ul>
+            {% endif %}-->
+            <button class="btn btn-danger btn-lg" type="submit">Sí, elimnar</button>
+            <button class="button button1"><a href="{% url 'empleado:mensaje_empleado' %}" style="color:white">Cancelar</a></button>
+        </form>
+    </div>
+</div>
+{% endblock %}
