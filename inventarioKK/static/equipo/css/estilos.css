@@ -19,3 +19,35 @@
 .button2 {background-color: #4cacaf;} /* LightBlue */
 
 .bgdiv{background-color:red;}
+
+.pagination{
+    color: #1b1b1b;
+}
+
+.pagination >li >a {
+    background-color: white;
+    color: #000000;
+}
+
+.pagination >li >a:focus,
+.pagination >li >a:hover,
+.pagination >li >span:focus,
+.pagination >li >span:hover
+{
+    color: #4cacaf;
+    background-color: #eee;
+    border-color: #ddd;
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: #353434 !important;
+    border: solid 1px  #353434 !important;
+}
+
+.pagination > .active > a
+{
+    background-color: #353434 !important;
+    border: solid 1px  #353434;
+}
