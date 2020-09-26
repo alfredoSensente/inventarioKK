@@ -1,0 +1,46 @@
+{% extends "equipo/layout_base_equipo.html"%}
+{% load static %}
+{% block title %}Busquedas{% endblock %}
+{% block body %}
+    <div class="container">
+    {% if object_list %}
+    <h1 class = 'text-center'>BUSQUEDAS</h1>
+        <div class="row justify-content-md-center text-right">
+            <button class="button button2 align-right"><a href="{% url 'equipo:lista_de_equipos' %}" style="color: white;">Regresar</a></button>
+        </div>
+
+        <div class = 'container'>
+            <table class="table table-dark text-center table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">N° REGISTRO</th>
+                    <th scope="col">TIPO DE EQUIPO</th>
+                    <th scope="col">MARCA</th>
+                    <th scope="col">ESTADO DEL EQUIPO</th>
+                    <th scope="col">DESCRIPCION</th>
+                    <th scope="col">DETALLE DEL EQUIPO</th>
+                </tr>
+                </thead>
+                <tbody>
+               
+                {% for equipo in object_list %}
+                <tr>
+                    <th scope="row">{{equipo.id_equipo}}</th>
+                    <td>{{equipo.id_tipo_equipo}}</td>
+                    <td>{{equipo.id_marca}}</td>
+                    <td>{{equipo.id_estado_equipo}}</td>
+                    <td>{{equipo.descripcion}}</td>
+                    <td>{{equipo.id_ubicacion}}</td>
+                    <td>{{equipo.id_ubicacion.id_edificio}}</td>
+                </tr>
+                 {% endfor %}
+    {% else %}
+        <h1>No se encontraron equipos!</h1>
+        <img src="{% static 'propias\tenor.gif' %}" alt="pepe">
+        <br>
+        <div class="row justify-content-md-center text-right">
+            <button class="button button2 align-right"><a href="{% url 'equipo:lista_de_equipos' %}" style="color: white;">Regresar</a></button>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
