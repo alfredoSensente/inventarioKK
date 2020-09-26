@@ -1,20 +1,22 @@
 """Modelos de Mantenimiento"""
 from django.db import models
 from equipo.models import Equipo
+from empleado.models import Empleado
 
 # Create your models here.
 class Mantenimiento(models.Model):
     """Modelo mantenimiento que utilizar modelo equipo importado de la app equipo"""
     id_mantenimiento = models.AutoField(primary_key=True)
+    id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
     id_equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, db_column='id_equipo')
 
     class Meta:
         managed = True
         db_table = 'mantenimiento'
+        unique_together = (('id_empleado', 'id_equipo'),)
 
     def __str__(self):
-        return str(self.id_mantenimiento)
-
+        return str(self.id_empleado) + " - " + str(self.id_equipo.id_tipo_equipo.nombre_tipo_equipo)
 
 class TipoCorrectivo(models.Model):
     """Modelo del tipo de correctivo"""

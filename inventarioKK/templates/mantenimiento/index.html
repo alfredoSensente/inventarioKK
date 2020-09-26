@@ -5,7 +5,9 @@
         <ul>
         {% if listado_mantenimiento %}
             {% for mante in listado_mantenimiento %}
-            <li><a href="{% url 'mantenimiento:descripcion' mante.id_mantenimiento %}">#{{ mante.id_mantenimiento }}</a></li>
+            <li><a href="{% url 'mantenimiento:descripcion' mante.id_mantenimiento %}">#{{ mante.id_mantenimiento }}</a>
+                <a href="{% url 'mantenimiento:borrar_mantenimiento' mante.id_mantenimiento %}">borrar</a>
+            </li>            
             {% endfor %}
         {% endif %}
         </ul>

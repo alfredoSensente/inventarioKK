@@ -1,10 +1,125 @@
 {% extends 'empleado/layout_base_empleado.html' %}
 {% block title %}Nuevo Empleado{% endblock %}
+{% load static %}
 {% block body %}
     <div class="container margen-arriba">
-        <form method="post">
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        <form method="POST">
             {% csrf_token %}
-            {{ form }}
+            <!-- titlulo del form -->
+            <div class="form-group">
+                <h1>Agregar Empleado</h1>
+            </div>
+            <!-- Nombres -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_tipo_equipo">Nombres:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.nombre}}
+                    </div>
+                </div>
+            </div>
+            <!-- Apellidos -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_marca">Apellidos:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.apellido }}
+                    </div>
+                </div>
+            </div>
+            <!-- fecha_nacimiento -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_estado_equipo">Fecha de Nacimiento:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.fecha_nacimiento}}
+                    </div>
+                </div>
+            </div>
+            <!-- DUI -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_ubicacion">DUI:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.dui }}
+                    </div>
+                </div>
+            </div>
+            <!-- NIT -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">NIT:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.nit }}
+                    </div>
+                </div>
+            </div>
+            <!-- Telefono Fijo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Telefono Fijo:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.telefono_fijo }}
+                    </div>
+                </div>
+            </div>
+            <!-- ID Cargo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Cargo:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.id_cargo }}
+                    </div>
+                </div>
+            </div>
+            <!-- Sexo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Sexo:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.id_sexo }}
+                    </div>
+                </div>
+            </div>
+            <!-- Estado Empleado -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Estado del Empleado:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.id_estado_empleado }}
+                    </div>
+                </div>
+            </div>
+            <!-- Ubicacion -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="">Ubicacion:</label>
+                    </div>
+                    <div class="col-md-3">
+                    {{ form.id_ubicacion }}
+                    </div>
+                </div>
+            </div>
             <p><br></p>
             <div class="row justify-content-md-center">
             <button type="submit" class="button button2" value="Agregar">Guardar</button>

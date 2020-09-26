@@ -1,22 +1,82 @@
 {% extends "empleado/layout_base_empleado.html"%}
 {% block title %}Descripcion{% endblock %}
+{% load static %}
 {% block body %}
+    <br>
     <div class="container">
-    {% if descripcion_empleado %}
-        <h3>Nombre: {{descripcion_empleado.nombre}}</h3>
-        <h3>Apellido: {{descripcion_empleado.apellido}}</h3>
-        <h3>Código de Empleado: {{descripcion_empleado.id_empleado}}</h3>
-        <h3>Fecha de Nacimiento: {{descripcion_empleado.fecha_nacimiento}}</h3>
-        <h3>Cargo: {{descripcion_empleado.id_cargo}}</h3>
-        <h3>Sexo: {{descripcion_empleado.id_sexo}}</h3>
-        <h3>DUI: {{descripcion_empleado.dui}}</h3>
-        <h3>NIT: {{descripcion_empleado.nit}}</h3>
-        <h3>Teléfono Fijo: {{descripcion_empleado.telefono_fijo}}</h3>
-        <h3>Estado: {{descripcion_empleado.id_estado_empleado}}</h3>
-        <h3>Ubicación: {{descripcion_empleado.id_ubicacion}}</h3>
-
-    {% else %}
-        <h3>No hay empleados!</h3>
-    {% endif %}
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <!--Tabla-->
+                {% if descripcion_empleado %}
+                <table class="table table-bordered table-hover table-dark text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Atributos</th>
+                        <th scope="col">Datos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                
+                        <tr>
+                            <th scope="row">Código</th> 
+                            <td>{{descripcion_empleado.id_empleado}}</td>      
+                        </tr>
+                        <tr>
+                            <th scope="row">Nombre(s):</th>
+                            <td>{{descripcion_empleado.nombre}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Apellidos:</th>
+                            <td>{{descripcion_empleado.apellido}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Fecha de Nacimiento:</th> 
+                            <td>{{descripcion_empleado.fecha_nacimiento}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">DUI:</th>
+                            <td>{{descripcion_empleado.dui}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">NIT:</th>
+                            <td>{{descripcion_empleado.nit}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Teléfono:</th>
+                            <td>{{descripcion_empleado.telefono_fijo}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cargo:</th>
+                            <td>{{descripcion_empleado.id_cargo}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sexo:</th>
+                            <td>{{descripcion_empleado.id_sexo}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Estado:</th>
+                            <td>{{descripcion_empleado.id_estado_empleado}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ubicación:</th>
+                            <td>{{descripcion_empleado.id_ubicacion}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Edificio:</th>
+                            <td>{{descripcion_empleado.id_ubicacion.id_edificio}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Acciones:</th>
+                            <td><a href="{% url 'empleado:editar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+                            <a href="{% url 'empleado:eliminar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/trash.svg' %}" alt="My image" width="30px"></a>
+                            </td>
+                        </tr>
+                {% else %}
+                    <h1 class="text-center">No hay empleados registrados</h1>
+                {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
