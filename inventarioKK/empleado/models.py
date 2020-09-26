@@ -1,6 +1,5 @@
 from django.db import models
 from equipo.models import Ubicacion
-from mantenimiento.models import Mantenimiento
 
 # Create your models here.
 class Cargo(models.Model):
@@ -59,19 +58,3 @@ class Empleado(models.Model):
 
     def __str__(self):
         return str(self.id_empleado) + " - " + self.nombre
-
-
-class EmpleadoPorMantenimiento(models.Model):
-    id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
-    id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE, db_column='id_mantenimiento')
-
-
-    class Meta:
-        managed = True
-        db_table = 'empleado_por_mantenimiento'
-        unique_together = (('id_empleado', 'id_mantenimiento'),)
-
-    def __str__(self):
-        return str(self.id_empleado) + " - " + str(self.id_mantenimiento)
-
-        
