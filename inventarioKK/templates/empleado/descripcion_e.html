@@ -68,7 +68,7 @@
                         <tr>
                             <th scope="row">Acciones:</th>
                             <td><a href="{% url 'empleado:editar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
-                            <a href="{% url 'empleado:eliminar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/trash.svg' %}" alt="My image" width="30px"></a>
+                                <a href="{% url 'empleado:eliminar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/trash.svg' %}" alt="My image" width="30px"></a>
                             </td>
                         </tr>
                 {% else %}
