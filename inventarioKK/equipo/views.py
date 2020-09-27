@@ -49,12 +49,12 @@ class BusquedaEquipo(generic.ListView):
         )
         return object_list
 
-class ListEquiposPdf(View):
-
-    def get(self, request, *args, **kwargs):
-        descripcion_equipo = Equipo.objects.get(pk=1)
-        data = {
+def PDF(request, id_equipo):
+    """Muestra al Equipo seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
+    descripcion_equipo = Equipo.objects.get(pk=id_equipo)
+    data = {
             'descripcion_equipo': descripcion_equipo
         }
-        pdf = render_to_pdf('equipo/lista.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
+    pdf = render_to_pdf('equipo/lista.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')
+
