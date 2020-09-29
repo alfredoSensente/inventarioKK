@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponse
 from .utils import render_to_pdf
+from datetime import datetime
 
 # Create your views here.
 class ListaDeEquipos(generic.ListView):
@@ -52,8 +53,12 @@ class BusquedaEquipo(generic.ListView):
 def PDF(request, id_equipo):
     """Muestra al Equipo seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
     descripcion_equipo = Equipo.objects.get(pk=id_equipo)
+    hora = datetime.now()
+    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
     data = {
-            'descripcion_equipo': descripcion_equipo
+            'descripcion_equipo': descripcion_equipo,
+            'fechaHora' : hora,
+            
         }
     pdf = render_to_pdf('equipo/lista.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
