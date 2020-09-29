@@ -9,6 +9,7 @@ urlpatterns = [
     path('editar_empleado/<int:pk>/', views.EditarEmpleado.as_view(), name='editar_empleado'),
     path('eliminar_empleado/<int:pk>/', views.EliminarEmpleado.as_view(), name='eliminar_empleado'),
     path('busqueda_empleado/', views.BusquedaEmpleado.as_view(), name='busqueda_empleado'),
+    path('<int:id_empleado>/EmpleadoPDF/', views.EmpleadoPDF, name='EmpleadoPDF'),
     path('error_empleado/', views.ErrorEmpleado, name='error_empleado'),
     
     ]
