@@ -1,15 +1,46 @@
-{% block title %}Reportes{% endblock %}
+{% block title %}{% endblock %}
+{% load static %}
 {% block body %}
-    <div class="container">
-    {% if descripcion_equipo %}
-        <h1>Id: {{descripcion_equipo.id_equipo}}</h1>
-        <h3>Tipo de equipo: {{descripcion_equipo.id_tipo_equipo}}</h3>
-        <h3>Marca: {{descripcion_equipo.id_marca}}</h3>
-        <h3>Estado del equipo: {{descripcion_equipo.id_estado_equipo}}</h3>
-        <h3>Descripcion: {{descripcion_equipo.descripcion}}</h3>
-        <h3>Ubicación: {{descripcion_equipo.id_ubicacion}}</h3>
-    {% else %}
-        <h3>No hay equipos!</h3>
-    {% endif %}
+    <div class="row justify-content-md-center tam-fuente">
+        <h1>REPORTE DE EQUIPO:</h1>
     </div>
+    <hr>
+    <br>
+    <table class="text-center">
+        <thead>
+          <tr>
+            <th scope="col">Código del equipo</th>
+            <th scope="col">Tipo de equipo</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Estado del equipo</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Ubicación</th>
+          </tr>
+        </thead>
+            <tbody>
+        {% if descripcion_equipo %}
+            <tr>
+                <th scope="row">{{descripcion_equipo.id_equipo}}</th>
+                <th >{{descripcion_equipo.id_tipo_equipo}}</th>
+                <th>{{descripcion_equipo.id_marca}}</th>
+                <th>{{descripcion_equipo.id_estado_equipo}}</th>
+                <th>{{descripcion_equipo.descripcion}}</th>
+                <th>{{descripcion_equipo.id_ubicacion}}</th>
+            </tr>
+            
+        {% else %}
+        <p>No hay registros de equipo</p>
+        {% endif %}
+            </tbody>
+    </table>
+    <hr>
+        </div>
+        <div class="tam-fuente">
+            <h1 class="text-right">inventarioKK</h1>
+            <h3>{{fechaHora}}</h3>
+        </div>
+        
+
+        
 {% endblock %}
+
