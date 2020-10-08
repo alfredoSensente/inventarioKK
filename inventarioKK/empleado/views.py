@@ -6,7 +6,7 @@ from .models import Empleado
 from .forms import EmpleadoForm
 from django.shortcuts import render
 from .utils import render_to_pdf
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 
 # Create your views here.
@@ -29,6 +29,16 @@ class CrearEmpleado(generic.CreateView):
     form_class = EmpleadoForm
     template_name = 'empleado/nuevo_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
+
+    def post(self, request, *args, **kwargs):
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            book.save()
+            return HttpResponseRedirect(reverse_lazy('empleado:mensaje_empleado'))
+        else:
+            return render(request, 'empleado/nuevo_empleado.html',
+                          {'form': form, 'error_date': 'Estas intentando contratar a un menor, pervertido!'})
 
 class EditarEmpleado(generic.UpdateView):
     """Actualiza el registro de un Empleado"""

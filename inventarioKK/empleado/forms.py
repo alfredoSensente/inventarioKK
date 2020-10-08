@@ -3,7 +3,7 @@ from django import forms
 from .models import Empleado
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
-import datetime 
+from datetime import date
 
 class EmpleadoForm(forms.ModelForm):
     """Formulario para agregar un nuevo empleado"""
@@ -71,5 +71,14 @@ class EmpleadoForm(forms.ModelForm):
                                           'name':'estado_empleado'}),
             'id_ubicacion':forms.Select(attrs={'class':'custom-select',
                                           'name':'ubicacion'}),
-            
         }
+
+    def clean_fecha_nacimiento(self):
+        cleaned_data = super().clean()
+        dob = cleaned_data.get("fecha_nacimiento")
+        today = date.today()
+        if (dob.year + 18, dob.month, dob.day) > (today.year, today.month, today.day):
+            raise forms.ValidationError('Must be at least 18 years old to register')
+        return dob
+            
+        
