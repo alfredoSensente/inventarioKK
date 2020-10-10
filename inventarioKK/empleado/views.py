@@ -47,6 +47,7 @@ class EditarEmpleado(generic.UpdateView):
     template_name = 'empleado/nuevo_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
 
+
 class EliminarEmpleado(generic.DeleteView):
     """Elimina un Empleado"""
     model = Empleado

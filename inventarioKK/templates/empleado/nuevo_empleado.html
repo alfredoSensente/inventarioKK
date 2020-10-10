@@ -41,6 +41,7 @@
                     <div class="col-md-3">
                         {{ form.fecha_nacimiento}}
                     </div>
+                    <!--mensaje de error si se quiere ingresar un menor de edad o una fecha en el futuro-->
                     {% if error_date %}
                     <small id="passwordHelpInline" class="letra-roja">
                         <strong>{{error_date}}</strong>
