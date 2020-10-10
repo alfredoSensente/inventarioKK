@@ -63,3 +63,10 @@ def PDF(request, id_equipo):
     pdf = render_to_pdf('equipo/lista.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
+class log(generic.View):
+    """
+    docstring
+    """
+    template_name = 'equipo/login.html'
+
+
