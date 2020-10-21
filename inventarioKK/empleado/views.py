@@ -8,6 +8,7 @@ from django.shortcuts import render
 from .utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
+from datetime import date
 
 # Create your views here.
 class Indice(generic.ListView):
@@ -46,7 +47,6 @@ class EditarEmpleado(generic.UpdateView):
     form_class = EmpleadoForm
     template_name = 'empleado/nuevo_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
-
 
 class EliminarEmpleado(generic.DeleteView):
     """Elimina un Empleado"""
@@ -87,11 +87,17 @@ def EmpleadoPDF(request, id_empleado):
 def ErrorEmpleado(request):
     return render(request, 'empleado/error.html')
 
-
-
-        
-        
-
-
-    
-
+def generador(request):
+    """
+    Termina de generar codigo
+    """
+    if request.method == 'POST':
+        print('llego')
+        if 'letras' in request.POST:
+            letras = request.POST['letras'].upper()
+            numero = str(Empleado.objects.filter(id_empleado__startswith=letras).count()+1).zfill(3)
+            anio = str(date.today().year)
+            print(anio)
+            codigo = letras+anio[:2]+numero
+            return HttpResponse(codigo)
+    return HttpResponse('FAIL!!!!!')

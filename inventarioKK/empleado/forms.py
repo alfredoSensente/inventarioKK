@@ -23,10 +23,10 @@ class EmpleadoForm(forms.ModelForm):
             'id_sexo',
             'id_estado_empleado',
             'id_ubicacion',
-
-
         ]
+
         labels = {
+            'id_empleado':'Codigo',
             'nombre':'Nombres',
             'apellido':'Apellidos',
             'fecha_nacimiento':'Fecha de Nacimiento',
@@ -39,14 +39,23 @@ class EmpleadoForm(forms.ModelForm):
             'id_ubicacion':'Ubicación',
         }
         widgets = {
+            'id_empleado':forms.TextInput(attrs={'class':'form-control',
+                                            'type':'text',
+                                            'placeholder':'codigo',
+                                            'name':'codigo',
+                                            'id':'codigo'}),
             'nombre':forms.TextInput(attrs={'class':'form-control',
                                             'type':'text',
                                             'placeholder':'Nombres',
-                                            'name':'nombre'}),
+                                            'name':'nombre',
+                                            'id':'nombre',
+                                            'onkeyup':'PasarValor("nombre","apellido","codigo",path)'}),
             'apellido':forms.TextInput(attrs={'class':'form-control',
                                               'type':'text',
                                               'placeholder':'Apellidos',
-                                              'name':'apellido'}),
+                                              'name':'apellido',
+                                              'id':'apellido',
+                                              'onkeyup':'PasarValor("nombre","apellido","codigo",path)'}),
             'fecha_nacimiento':forms.TextInput(attrs={'class':'form-control',
                                                       'type':'date',
                                                       'placeholder':'Fecha',
@@ -80,5 +89,4 @@ class EmpleadoForm(forms.ModelForm):
         if (dob.year + 18, dob.month, dob.day) > (today.year, today.month, today.day):
             raise forms.ValidationError('Must be at least 18 years old to register')
         return dob
-            
-        
+       

@@ -39,7 +39,7 @@ class EstadoEmpleado(models.Model):
 
 
 class Empleado(models.Model):
-    id_empleado = models.AutoField(primary_key=True)
+    id_empleado = models.CharField(primary_key=True, max_length= 7)
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
     fecha_nacimiento = models.DateField()
