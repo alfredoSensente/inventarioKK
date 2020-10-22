@@ -1,4 +1,3 @@
-{% extends "empleado/layout_base_empleado.html"%}
 {% block title %}Descripcion{% endblock %}
 {% load static %}
 {% block body %}
@@ -15,71 +14,69 @@
                         <th scope="col">Datos</th>
                     </tr>
                     </thead>
+                    <hr>
                     <tbody>
                 
                         <tr>
                             <th scope="row">Código</th> 
-                            <td>{{descripcion_empleado.id_empleado}}</td>      
+                            <th>{{descripcion_empleado.id_empleado}}</th>      
                         </tr>
                         <tr>
                             <th scope="row">Nombre(s):</th>
-                            <td>{{descripcion_empleado.nombre}}</td>
+                            <th>{{descripcion_empleado.nombre}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Apellidos:</th>
-                            <td>{{descripcion_empleado.apellido}}</td>
+                            <th>{{descripcion_empleado.apellido}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Fecha de Nacimiento:</th> 
-                            <td>{{descripcion_empleado.fecha_nacimiento}}</td>
+                            <th>{{descripcion_empleado.fecha_nacimiento}}</th>
                         </tr>
                         <tr>
                             <th scope="row">DUI:</th>
-                            <td>{{descripcion_empleado.dui}}</td>
+                            <th>{{descripcion_empleado.dui}}</th>
                         </tr>
                         <tr>
                             <th scope="row">NIT:</th>
-                            <td>{{descripcion_empleado.nit}}</td>
+                            <th>{{descripcion_empleado.nit}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Teléfono:</th>
-                            <td>{{descripcion_empleado.telefono_fijo}}</td>
+                            <th>{{descripcion_empleado.telefono_fijo}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Cargo:</th>
-                            <td>{{descripcion_empleado.id_cargo}}</td>
+                            <th>{{descripcion_empleado.id_cargo}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Sexo:</th>
-                            <td>{{descripcion_empleado.id_sexo}}</td>
+                            <th>{{descripcion_empleado.id_sexo}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Estado:</th>
-                            <td>{{descripcion_empleado.id_estado_empleado}}</td>
+                            <th>{{descripcion_empleado.id_estado_empleado}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Ubicación:</th>
-                            <td>{{descripcion_empleado.id_ubicacion}}</td>
+                            <th>{{descripcion_empleado.id_ubicacion}}</th>
                         </tr>
                         <tr>
                             <th scope="row">Edificio:</th>
-                            <td>{{descripcion_empleado.id_ubicacion.id_edificio}}</td>
+                            <th>{{descripcion_empleado.id_ubicacion.id_edificio}}</th>
                         </tr>
-                        <tr>
-                            <th scope="row">Acciones:</th>
-                            <td><a href="{% url 'empleado:editar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
-                                <a href="{% url 'empleado:eliminar_empleado' descripcion_empleado.id_empleado %}"><img src="{% static 'bootstrap/icons/trash.svg' %}" alt="My image" width="30px"></a>
-                            </td>
-                        </tr>
+                        
                 {% else %}
                     <h1 class="text-center">No hay empleados registrados</h1>
                 {% endif %}
                     </tbody>
                 </table>
-                <div class="row justify-content-md-center">
-                    <button type="button" class="button button2 "><a href="{% url 'empleado:mensaje_empleado' %}" style="color: white;">Regresar</a></button>
-                    <button type="button" class="button button1 "><a href="{% url 'empleado:EmpleadoPDF' descripcion_empleado.id_empleado %}" style="color: white;">Imprimir</a></button>
-                </div>
+                <hr>
+        </div>
+        <div>
+            <h1 class="text-right">inventarioKK</h1>
+            <h3>{{fechaHora}}</h3>
+        </div>
             </div>
         </div>
     </div>

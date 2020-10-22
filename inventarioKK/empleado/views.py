@@ -5,6 +5,10 @@ from django.db.models import Q
 from .models import Empleado
 from .forms import EmpleadoForm
 from django.shortcuts import render
+from .utils import render_to_pdf
+from django.http import HttpResponse, HttpResponseRedirect
+from datetime import datetime
+from datetime import date
 
 # Create your views here.
 class Indice(generic.ListView):
@@ -26,6 +30,16 @@ class CrearEmpleado(generic.CreateView):
     form_class = EmpleadoForm
     template_name = 'empleado/nuevo_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
+
+    def post(self, request, *args, **kwargs):
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            book = form.save()
+            book.save()
+            return HttpResponseRedirect(reverse_lazy('empleado:mensaje_empleado'))
+        else:
+            return render(request, 'empleado/nuevo_empleado.html',
+                          {'form': form, 'error_date': 'Estas intentando contratar a un menor, pervertido!'})
 
 class EditarEmpleado(generic.UpdateView):
     """Actualiza el registro de un Empleado"""
@@ -57,14 +71,33 @@ class BusquedaEmpleado(generic.ListView):
         )
         return object_list
 
+def EmpleadoPDF(request, id_empleado):
+    """Muestra al Empleado seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
+    descripcion_empleado = Empleado.objects.get(pk=id_empleado)
+    hora = datetime.now()
+    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
+    data = {
+            'descripcion_empleado': descripcion_empleado,
+            'fechaHora' : hora,
+            
+        }
+    pdf = render_to_pdf('empleado/pdf_empleado.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')
+
 def ErrorEmpleado(request):
     return render(request, 'empleado/error.html')
 
-
-
-        
-        
-
-
-    
-
+def generador(request):
+    """
+    Termina de generar codigo
+    """
+    if request.method == 'POST':
+        print('llego')
+        if 'letras' in request.POST:
+            letras = request.POST['letras'].upper()
+            numero = str(Empleado.objects.filter(id_empleado__startswith=letras).count()+1).zfill(3)
+            anio = str(date.today().year)
+            print(anio)
+            codigo = letras+anio[:2]+numero
+            return HttpResponse(codigo)
+    return HttpResponse('FAIL!!!!!')
