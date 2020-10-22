@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView, logout_then_login, login_required
 """inventarioKK URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

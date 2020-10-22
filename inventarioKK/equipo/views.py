@@ -7,6 +7,15 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .utils import render_to_pdf
 from datetime import datetime
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect 
+from django.http import HttpResponse
+from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
+
+from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 class ListaDeEquipos(generic.ListView):
@@ -63,10 +72,24 @@ def PDF(request, id_equipo):
     pdf = render_to_pdf('equipo/lista.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
-class log(generic.View):
-    """
-    docstring
-    """
-    template_name = 'equipo/login.html'
+def loginpage(request):
+    userlogin = "admin"
+    passw = "admin"
+    if request.method == 'POST':
+    		username = request.POST.get('username')
+    		password = request.POST.get('password')
 
+    		
 
+    		if userlogin == username and passw == password:
+    			"""login(request, user)"""
+    			return redirect('equipo:lista_de_equipos')
+    		else:
+    			messages.info(request, 'Usuario o contraseña incorrectos')
+
+    context = {}
+    return render(request, 'equipo/login.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('equipo:login')

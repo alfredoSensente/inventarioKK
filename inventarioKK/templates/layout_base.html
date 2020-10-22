@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Krustaceo Kaskarudo K.K.</a>
+        <a class="navbar-brand"><img src="{% static 'img\cube.png' %}" alt="cubo" width="20" height="20" >Nucleus SV</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,9 +24,6 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{% url 'equipo:lista_de_equipos' %}">Equipos en existencia</a>
                     <a class="dropdown-item" href="{% url 'equipo:nuevo_equipo' %}">Agregar Equipo</a>
-                    <a class="dropdown-item" href="https://www.facebook.com/FRANCISJFAG">Una donita brother?</a>
-                    <a class="dropdown-item" href="https://pbs.twimg.com/media/Eea7qyoX0AM6tJL.jpg:large">Ventiladores</a>
-                    <a class="dropdown-item" href="#">chingo de formularios</a>
                   </div>
                 </div>
             
@@ -48,7 +45,7 @@
             </li>
           </ul>
           <span class="navbar-text">
-            La receta secreta es...
+            <span ><a class="navbarText" href="{% url 'equipo:logout' %}">Logout</a></span>
           </span>
         </div>
     </nav>
