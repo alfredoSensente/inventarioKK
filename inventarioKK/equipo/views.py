@@ -16,36 +16,41 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-class ListaDeEquipos(generic.ListView):
+class MyView(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
+class ListaDeEquipos(LoginRequiredMixin, generic.ListView):
     """vista generica tabla equipos"""
     paginate_by = 7
     template_name= 'equipo/index.html'
     context_object_name = 'lista_equipo'
     model = Equipo
    
-class EquipoCreate(generic.CreateView):
+class EquipoCreate(LoginRequiredMixin, generic.CreateView):
     """Crear un nuevo equipo"""
     model = Equipo
     form_class = EquipoForm
     template_name = 'equipo/nuevo_equipo.html'
     success_url = reverse_lazy('equipo:lista_de_equipos')
 
-class DescripcionEquipo(generic.DetailView):
+class DescripcionEquipo(LoginRequiredMixin, generic.DetailView):
     """Muestra una descripcion de cada Equipo"""
     template_name = 'equipo/descripcion_equipo.html'
     context_object_name = 'descripcion_equipo'
     model = Equipo
 
-class EquipoUpdate(generic.UpdateView):
+class EquipoUpdate(LoginRequiredMixin, generic.UpdateView):
     """Actualiza el registro de un equipo"""
     model = Equipo
     form_class = EquipoForm
     template_name = 'equipo/nuevo_equipo.html'
     success_url = reverse_lazy('equipo:lista_de_equipos')
 
-class BusquedaEquipo(generic.ListView):
+class BusquedaEquipo(LoginRequiredMixin, generic.ListView):
     """Busca un Equipo"""
     model = Equipo
     context_object_name = 'busqueda_equipo'
