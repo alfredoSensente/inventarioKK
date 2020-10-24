@@ -72,7 +72,7 @@ class EstadoEquipo(models.Model):
 
 
 class Equipo(models.Model):
-    id_equipo = models.AutoField(primary_key=True)
+    id_equipo = models.CharField(primary_key=True, max_length=8)
     modelo = models.CharField(max_length=45)
     descripcion = models.TextField(blank=True, null=True)
     anho_fabricacion = models.CharField(max_length = 4, blank=True, null=True)

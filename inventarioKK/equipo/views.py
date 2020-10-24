@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.http import HttpResponse
 from .utils import render_to_pdf
 from datetime import datetime
+from datetime import date
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect 
 from django.http import HttpResponse
@@ -98,3 +99,18 @@ def loginpage(request):
 def logoutUser(request):
     logout(request)
     return redirect('equipo:login')
+
+def generador(request):
+    """
+    Termina de generar codigo
+    """
+    if request.method == 'POST':
+        print('llego')
+        if 'letras' in request.POST:
+            letras = request.POST['letras'].upper()
+            numero = str(Equipo.objects.filter(id_equipo__startswith=letras).count()+1).zfill(3)
+            anio = str(date.today().year)
+            codigo = letras+anio[:2]+numero
+            print(codigo)
+            return HttpResponse(codigo)
+    return HttpResponse('FAIL!!!!!')

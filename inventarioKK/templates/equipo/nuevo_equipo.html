@@ -9,6 +9,17 @@
             <div class="form-group">
                 <h1>Agregar o Editar equipo</h1>
             </div>
+            <!-- Codigo Equipo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_tipo_equipo">Codigo:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.id_equipo}}
+                    </div>
+                </div>
+            </div>
             <!-- tipo equipo -->
             <div class="form-group">
                 <div class="form-row">
@@ -28,6 +39,28 @@
                     </div>
                     <div class="col-md-3">
                         {{ form.id_marca }}
+                    </div>
+                </div>
+            </div>
+            <!-- modelo -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_marca">Modelo:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.modelo }}
+                    </div>
+                </div>
+            </div>
+            <!-- marca -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_marca">Año de Fabricacion:</label>
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.anho_fabricacion }}
                     </div>
                 </div>
             </div>

@@ -39,11 +39,44 @@ function SelectPasarValor(valor1, valor2, codigo, URL) {
     
 }
 
+function SelectPasarValorEquipo(valor1, valor2, valor3, codigo, URL) {
+
+    var combo1 = document.getElementById(valor1);
+    var selected1 = combo1.options[combo1.selectedIndex].text.charAt(0);
+    var combo2 = document.getElementById(valor2);
+    var selected2 = combo2.options[combo2.selectedIndex].text.charAt(0);
+    var combo3 = document.getElementById(valor3);
+    var selected3 = combo3.options[combo3.selectedIndex].text.charAt(0);
+
+    if (combo1.value!=0 && combo2.value!=0 && combo3.value!=0) {
+
+        ObtenerCodigoSelected(selected1, selected2, selected3, codigo, URL)   
+
+    }
+    
+}
+
 function ObtenerCodigo(letra1, letra2, codigo, URL) {
     const csrftoken = getCookie('csrftoken');
     console.log('llego a obtener codigo')
     if (letra1!="" &&  letra2!="") {
         let letras = letra1 + '' + letra2;
+        let data ={
+                    'csrfmiddlewaretoken':csrftoken,
+                    'letras':letras,
+                    };
+        console.log(URL)
+        $.post(URL, data, function(response){ 
+                document.getElementById(codigo).value = response
+        });
+    }
+}
+function ObtenerCodigoSelected(letra1, letra2, letra3, codigo, URL) {
+    URL = '/equipo/generador/'
+    const csrftoken = getCookie('csrftoken');
+    console.log('llego a obtener codigo select')
+    if (letra1!="" &&  letra2!="" &&  letra3!="") {
+        let letras = letra1 + letra2 + letra3;
         let data ={
                     'csrfmiddlewaretoken':csrftoken,
                     'letras':letras,
