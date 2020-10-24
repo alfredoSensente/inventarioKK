@@ -4,6 +4,8 @@ from django.db import models
 class Marca(models.Model):
     id_marca = models.AutoField(primary_key=True)
     nombre_marca = models.CharField(max_length=45)
+    soporte_tecnico = models.CharField(max_length=9, blank=True, null=True)
+    
 
     class Meta:
         managed = True
@@ -27,6 +29,11 @@ class TipoEquipo(models.Model):
 class Edificio(models.Model):
     id_edificio = models.AutoField(primary_key=True)
     nombre_edificio = models.CharField(max_length=45)
+    tipo_infraestructura = models.CharField(max_length=45)
+    anho_construccion = models.CharField(max_length=4, blank=True, null=True)
+    numero_empleados = models.CharField(max_length=4)
+    capacidad_maxima = models.CharField(max_length=4)
+    observaciones = models.CharField(max_length=45)
 
     class Meta:
         managed = True
@@ -39,6 +46,7 @@ class Edificio(models.Model):
 class Ubicacion(models.Model):
     id_ubicacion = models.AutoField(primary_key=True)
     nombre_ubicacion = models.CharField(max_length=45)
+    telefono_fijo = models.CharField(max_length=9, blank=True, null=True)
     id_edificio = models.ForeignKey(Edificio, on_delete=models.CASCADE, db_column='id_edificio')
 
 
@@ -65,11 +73,14 @@ class EstadoEquipo(models.Model):
 
 class Equipo(models.Model):
     id_equipo = models.AutoField(primary_key=True)
+    modelo = models.CharField(max_length=45)
+    descripcion = models.TextField(blank=True, null=True)
+    anho_fabricacion = models.CharField(max_length = 4, blank=True, null=True)
     id_tipo_equipo = models.ForeignKey(TipoEquipo, on_delete=models.CASCADE, db_column='id_tipo_equipo')
     id_marca = models.ForeignKey(Marca, on_delete=models.CASCADE, db_column='id_marca')
     id_estado_equipo = models.ForeignKey(EstadoEquipo, on_delete=models.CASCADE, db_column='id_estado_equipo')
     id_ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, db_column='id_ubicacion')
-    descripcion = models.TextField(blank=True, null=True)
+    
 
     class Meta:
         managed = True

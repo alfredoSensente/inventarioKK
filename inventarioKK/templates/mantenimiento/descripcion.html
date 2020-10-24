@@ -1,26 +1,5 @@
 {% extends "layout_base.html"%}
 {% block title %}Descripcion{% endblock %}
 {% block body %}
-    <div class="container">
-    {% if descripcion_mantenimiento %}
-        {% for mante in descripcion_mantenimiento.preventivo_set.all %}
-        <h3>Mantenimiento Preventivo #{{mante.id_preventivo}}</h3>
-        <h4>Descripcion:</h4>
-        <p>{{mante.descripcion}}</p>
-        <p>Fecha en que se realizo: <strong>{{mante.fecha_preventivo}}</strong></p>
-        {% endfor %}
-    {% else %}
-        <h3>No hay datos!</h3>
-    {% endif %}
-    {% if descripcion_mantenimiento %}
-        {% for mante in descripcion_mantenimiento.correctivo_set.all %}
-        <h3>Mantenimiento Correctivo #{{mante.id_correctivo}}</h3>
-        <h4>Descripcion:</h4>
-        <p>{{mante.descripcion}}</p>
-        <p>Fecha en que se realizo: <strong>{{mante.fecha_correctivo}}</strong></p>
-        {% endfor %}
-    {% else %}
-        <h3>No hay datos!</h3>
-    {% endif %}
-    </div>
+
 {% endblock %}

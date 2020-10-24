@@ -4,11 +4,28 @@ from equipo.models import Equipo
 from empleado.models import Empleado
 
 # Create your models here.
+class TipoMantenimiento(models.Model):
+    """Modelo para Tipo de Mantenimiento (Correctivo, Preventivo o Innovativo)"""
+    id_tipo_mantenimiento = models.AutoField(primary_key=True)
+    nombre_tipo_mantenimiento = models.CharField(max_length=45)
+    subtipo_mantenimiento = models.CharField(max_length=45)
+    descripcion = models.CharField(max_length=45)
+
+    class Meta:
+        managed = True
+        db_table = 'tipo_mantenimiento'
+
+    def __str__(self):
+        return str(self.nombre_tipo_mantenimiento) + " - " + str(self.subtipo_mantenimiento)
+
 class Mantenimiento(models.Model):
     """Modelo mantenimiento que utilizar modelo equipo importado de la app equipo"""
     id_mantenimiento = models.AutoField(primary_key=True)
+    fecha = models.CharField(max_length = 45)
+    descripcion = models.CharField(max_length= 45)
     id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
     id_equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, db_column='id_equipo')
+    id_tipo_mantenimiento = models.ForeignKey(TipoMantenimiento, on_delete=models.CASCADE, db_column='id_tipo_mantenimiento')
 
     class Meta:
         managed = True
@@ -18,95 +35,41 @@ class Mantenimiento(models.Model):
     def __str__(self):
         return str(self.id_empleado) + " - " + str(self.id_equipo.id_tipo_equipo.nombre_tipo_equipo)
 
-class TipoCorrectivo(models.Model):
-    """Modelo del tipo de correctivo"""
-    id_tipo_correctivo = models.AutoField(primary_key=True)
-    nombre_tipo_correctivo = models.CharField(max_length=45)
+class TipoRecurso(models.Model):
+    """Modelo para Tipo de Recurso"""
+    id_tipo_recurso = models.AutoField(primary_key=True)
+    nombre_tipo_recurso = models.CharField(max_length=45)
 
     class Meta:
         managed = True
-        db_table = 'tipo_correctivo'
+        db_table = 'tipo_recurso'
 
     def __str__(self):
-        return self.nombre_tipo_correctivo
+        return str(self.nombre_tipo_recurso)
 
-
-class Correctivo(models.Model):
-    """Modelo del Correcto"""
-    id_correctivo = models.AutoField(primary_key=True)
-    descripcion = models.TextField(blank=True, null=False)
-    fecha_correctivo = models.DateField(blank=True, null=False)
-    id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE,
-                                         db_column='id_mantenimiento')
-    id_tipo_correctivo = models.ForeignKey(TipoCorrectivo, on_delete=models.CASCADE,
-                                           db_column='id_tipo_correctivo')
-
+class Bodega(models.Model):
+    """Modelo para Bodega"""
+    id_bodega = models.AutoField(primary_key=True)
+    nombre_recurso = models.CharField(max_length=45)
+    descripcion = models.CharField(max_length=45)
+    id_tipo_recurso = models.ForeignKey(TipoRecurso, on_delete=models.CASCADE, db_column= 'id_tipo_recurso')
 
     class Meta:
         managed = True
-        db_table = 'correctivo'
-        unique_together = (('id_correctivo', 'id_tipo_correctivo', 'id_mantenimiento'),)
+        db_table = 'bodega'
 
     def __str__(self):
-        return str(self.id_correctivo) + " - " + str(self.fecha_correctivo)
+        return str(self.id_bodega) + " - " + str(self.nombre_recurso)
 
-
-class MetodoPreventivo(models.Model):
-    """Modelo del tipo de correctivo"""
-    id_metodo_preventivo = models.AutoField(primary_key=True)
-    nombre_metodo_preventivo = models.CharField(max_length=45)
+class MantenimientoPorBodega(models.Model):
+    """Modelo para Mantenimiento por Recurso"""
+    id_mantenimiento_por_bodega = models.AutoField(primary_key=True)
+    id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE, db_column='id_mantenimiento')
+    id_bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, db_column='id_bodega')
 
     class Meta:
         managed = True
-        db_table = 'metodo_preventivo'
+        db_table = 'tipo_mantenimiento_por_recurso'
 
     def __str__(self):
-        return self.nombre_metodo_preventivo
-
-
-class TipoPreventivo(models.Model):
-    """Modelo para el tipo de mantenimiento preventivo"""
-    id_tipo_preventivo = models.AutoField(primary_key=True)
-    nombre_tipo_preventivo = models.CharField(max_length=45)
-    id_metodo_preventivo = models.ForeignKey(MetodoPreventivo, on_delete=models.CASCADE,
-                                             db_column='id_metodo_preventivo')
-
-    class Meta:
-        managed = True
-        db_table = 'tipo_preventivo'
-
-    def __str__(self):
-        return self.nombre_tipo_preventivo
-
-
-class Preventivo(models.Model):
-    """Modelo de matenimiento preventivo"""
-    id_preventivo = models.AutoField(primary_key=True)
-    descripcion = models.TextField(blank=True, null=False)
-    fecha_preventivo = models.DateField()
-    id_tipo_preventivo = models.ForeignKey(TipoPreventivo, on_delete=models.CASCADE,
-                                           db_column='id_tipo_preventivo')
-    id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE,
-                                         db_column='id_mantenimiento')
-    class Meta:
-        managed = True
-        db_table = 'preventivo'
-
-    def __str__(self):
-        return str(self.id_preventivo) + " - " + str(self.fecha_preventivo)
-
-
-class Innovativo(models.Model):
-    """Modelo para mantenimiento innovativo"""
-    id_innovativo = models.AutoField(primary_key=True)
-    descripcion = models.TextField(blank=True, null=False)
-    fecha_innovativo = models.DateField()
-    id_mantenimiento = models.ForeignKey(Mantenimiento, on_delete=models.CASCADE,
-                                         db_column='id_mantenimiento')
-
-    class Meta:
-        managed = True
-        db_table = 'innovativo'
-
-    def __str__(self):
-        return str(self.id_innovativo) + " - " + str(self.fecha_innovativo)
+        return 'M: ' + str(self.id_mantenimiento) + " - MxB: " + str(self.id_mantenimiento_por_bodega) + " - B: " + str(self.id_bodega)
