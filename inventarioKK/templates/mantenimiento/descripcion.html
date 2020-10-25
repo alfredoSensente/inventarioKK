@@ -1,5 +1,20 @@
-{% extends "layout_base.html"%}
-{% block title %}Descripcion{% endblock %}
+{% extends "mantenimiento/layout_base_mantenimiento.html"%}
+{% block title %}Descripcion Mantenimiento{% endblock %}
 {% block body %}
-
+    <div class="container">
+    {% if descripcion_mantenimiento %}
+        <h1>Id: {{descripcion_mantenimiento.id_mantenimiento}}</h1>
+        <h3>Fecha: {{descripcion_mantenimiento.fecha}}</h3>
+        <h3>Descripcion: {{descripcion_mantenimiento.descripcion}}</h3>
+        <h3>Tipo de mantenimiento: {{descripcion_mantenimiento.id_tipo_mantenimiento}}</h3>
+        <h3>Empleado: {{descripcion_mantenimiento.id_empleado}}</h3>
+        <h3>Equipo: {{descripcion_mantenimiento.id_equipo}}</h3>
+        <div class="row justify-content-md-center">
+            <a type="button" class="btn btn-dark" href="{% url 'mantenimiento:index' %}">Regresar</a>
+            <a type="button" class="btn btn-dark" href="{% url 'mantenimiento:PDF' descripcion_mantenimiento.id_mantenimiento %}">Imprimir</a>
+        </div>
+    {% else %}
+        <h3>No hay mantenimientos!</h3>
+    {% endif %}
+    </div>
 {% endblock %}
