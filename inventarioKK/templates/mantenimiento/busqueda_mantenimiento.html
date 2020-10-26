@@ -39,8 +39,8 @@
       <td>{{mantenimiento.id_equipo}}</td>
       <td>{{mantenimiento.fecha}}</td>
       <td>{{mantenimiento.id_tipo_mantenimiento}}</td>
-      <td><a href="{% url 'mantenimiento:descripcion_mantenimiento' mantenimiento.id_mantenimiento %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
-          <a href="{% url 'mantenimiento:editar_mantenimiento' mantenimiento.id_mantenimiento %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+      <td><a href="{% url 'mantenimiento:descripcion' mantenimiento.id_mantenimiento %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+          <a href="{% url 'mantenimiento:editar' mantenimiento.id_mantenimiento %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
           
       </td>
     </tr>

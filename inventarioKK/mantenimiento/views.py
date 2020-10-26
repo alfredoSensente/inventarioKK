@@ -1,11 +1,12 @@
 """Vistas de Mantenimiento"""
 from django.views import generic
 from django.urls import reverse_lazy
+from django.db.models import Q
 from datetime import datetime
 from datetime import date
 from equipo.utils import render_to_pdf
-from django.http import HttpResponse
-from .models import Mantenimiento
+from django.http import HttpResponse, HttpResponseRedirect
+from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento
 from .forms import MantenimientoForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -38,6 +39,22 @@ class MantenimientoCreate(LoginRequiredMixin, generic.CreateView):
     context_object_name = 'mantenimiento_objeto'
     template_name = 'mantenimiento/nuevo_mantenimiento.html'
     success_url = reverse_lazy('mantenimiento:index')
+
+class BusquedaMantenimiento(LoginRequiredMixin, generic.ListView):
+    """Busca un Mantenimiento"""
+    model = Mantenimiento
+    context_object_name = 'mantenimiento_objeto'
+    template_name = 'mantenimiento/busqueda_mantenimiento.html'
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Mantenimiento.objects.filter(
+            Q(id_mantenimiento__icontains=query) | Q(fecha__icontains=query) | Q(descripcion__icontains=query) |
+            Q(id_empleado__id_empleado__icontains=query) | Q(id_equipo__id_equipo__icontains=query) | 
+            Q(id_tipo_mantenimiento__nombre_tipo_mantenimiento__icontains=query) | Q(id_tipo_mantenimiento__id_tipo_mantenimiento__icontains=query) |
+            Q(id_empleado__nombre__icontains=query)
+        ) 
+        return object_list
 
 def PDF(request, id_mantenimiento):
     """Muestra al Mantenimiento seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
