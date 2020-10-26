@@ -14,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Index(LoginRequiredMixin, generic.ListView):
     """Vista generica Index"""
     # Matenimiento.objects.all()
+    paginate_by = 5
     template_name = 'mantenimiento/index.html'
     context_object_name = 'tabla_mantenimiento'
     model = Mantenimiento

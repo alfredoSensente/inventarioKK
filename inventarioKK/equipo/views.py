@@ -27,7 +27,7 @@ class MyView(LoginRequiredMixin, View):
 
 class ListaDeEquipos(LoginRequiredMixin, generic.ListView):
     """vista generica tabla equipos"""
-    paginate_by = 7
+    paginate_by = 5
     template_name= 'equipo/index.html'
     context_object_name = 'lista_equipo'
     model = Equipo
