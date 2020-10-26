@@ -39,16 +39,16 @@ class MantenimientoCreate(generic.CreateView):
     success_url = reverse_lazy('mantenimiento:index')
 
 def PDF(request, id_mantenimiento):
-    """Muestra al Equipo seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
+    """Muestra al Mantenimiento seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
     descripcion_mantenimiento = Mantenimiento.objects.get(pk=id_mantenimiento)
     hora = datetime.now()
     """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
     data = {
-            'descripcion_equipo': descripcion_mantenimiento,
+            'descripcion_mantenimiento': descripcion_mantenimiento,
             'fechaHora' : hora,
             
         }
-    pdf = render_to_pdf('equipo/lista.html', data)
+    pdf = render_to_pdf('mantenimiento/pdf_mantenimiento.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
 def generador(request):
