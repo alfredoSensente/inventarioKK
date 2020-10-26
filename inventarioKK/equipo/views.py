@@ -18,6 +18,7 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import qrcode
 
 # Create your views here.
 class MyView(LoginRequiredMixin, View):
@@ -43,6 +44,7 @@ class DescripcionEquipo(LoginRequiredMixin, generic.DetailView):
     template_name = 'equipo/descripcion_equipo.html'
     context_object_name = 'descripcion_equipo'
     model = Equipo
+
 
 class EquipoUpdate(LoginRequiredMixin, generic.UpdateView):
     """Actualiza el registro de un equipo"""
@@ -114,3 +116,14 @@ def generador(request):
             print(codigo)
             return HttpResponse(codigo)
     return HttpResponse('FAIL!!!!!')
+
+def QR(request, id_equipo):
+    descripcion_equipo = Equipo.objects.get(pk=id_equipo)
+    img=qrcode.make(f'equipo/{id_equipo}')
+    data = {
+            'descripcion_equipo': descripcion_equipo,
+            'img' : img,
+            
+        }
+    
+    return HttpResponse(img.show('code.png'))

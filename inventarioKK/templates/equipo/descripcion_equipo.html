@@ -12,6 +12,10 @@
         <div class="row justify-content-md-center">
             <button class="button button2 "><a href="{% url 'equipo:lista_de_equipos' %}" style="color: white;">Regresar</a></button>
             <button class="button button1 "><a href="{% url 'equipo:PDF' descripcion_equipo.id_equipo %}" style="color: white;">Imprimir</a></button>
+            <div>
+                <button class="button button1 "><a href="{% url 'equipo:QR' descripcion_equipo.id_equipo %}" style="color: white;">codigo QR</a></button>
+                
+            </div>
         </div>
     {% else %}
         <h3>No hay equipos!</h3>
