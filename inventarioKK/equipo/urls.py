@@ -12,4 +12,5 @@ urlpatterns = [
     path('<str:pk>/', views.DescripcionEquipo.as_view(), name='des_equipo'),
     path('editar_equipo/<str:pk>/', views.EquipoUpdate.as_view(), name='editar_equipo'),
     path('<str:id_equipo>/PDF/', views.PDF, name='PDF'),
+    path('<str:id_equipo>/QR/', views.QR, name='QR'),
 ]

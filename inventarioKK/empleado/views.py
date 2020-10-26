@@ -9,22 +9,23 @@ from .utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 from datetime import date
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-class Indice(generic.ListView):
+class Indice(LoginRequiredMixin, generic.ListView):
     """Vista Genèrica de Tabla de Empleados"""
     template_name = 'empleado/e_index.html'
     context_object_name = 'lista_empleado'
     model = Empleado
     paginate_by = 5
 
-class DescripcionEmpleado(generic.DetailView):
+class DescripcionEmpleado(LoginRequiredMixin, generic.DetailView):
     """Muestra una descripcion de cada Empleado"""
     template_name = 'empleado/descripcion_e.html'
     context_object_name = 'descripcion_empleado'
     model = Empleado
 
-class CrearEmpleado(generic.CreateView):
+class CrearEmpleado(LoginRequiredMixin, generic.CreateView):
     """Muestra el formulario para crear un nuevo Empleado"""
     model = Empleado
     form_class = EmpleadoForm
@@ -41,21 +42,21 @@ class CrearEmpleado(generic.CreateView):
             return render(request, 'empleado/nuevo_empleado.html',
                           {'form': form, 'error_date': 'Estas intentando contratar a un menor, pervertido!'})
 
-class EditarEmpleado(generic.UpdateView):
+class EditarEmpleado(LoginRequiredMixin, generic.UpdateView):
     """Actualiza el registro de un Empleado"""
     model = Empleado
     form_class = EmpleadoForm
     template_name = 'empleado/nuevo_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
 
-class EliminarEmpleado(generic.DeleteView):
+class EliminarEmpleado(LoginRequiredMixin, generic.DeleteView):
     """Elimina un Empleado"""
     model = Empleado
     context_object_name = 'descripcion_empleado'
     template_name = 'empleado/eliminar_empleado.html'
     success_url = reverse_lazy('empleado:mensaje_empleado')
 
-class BusquedaEmpleado(generic.ListView):
+class BusquedaEmpleado(LoginRequiredMixin, generic.ListView):
     """Busca un Empleado"""
     model = Empleado
     context_object_name = 'eliminacion_empleado'

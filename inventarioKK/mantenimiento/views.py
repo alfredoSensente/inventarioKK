@@ -7,30 +7,31 @@ from equipo.utils import render_to_pdf
 from django.http import HttpResponse
 from .models import Mantenimiento
 from .forms import MantenimientoForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
-class Index(generic.ListView):
+class Index(LoginRequiredMixin, generic.ListView):
     """Vista generica Index"""
     # Matenimiento.objects.all()
     template_name = 'mantenimiento/index.html'
     context_object_name = 'tabla_mantenimiento'
     model = Mantenimiento
 
-class DescripcionMatenimiento(generic.DetailView):
+class DescripcionMatenimiento(LoginRequiredMixin, generic.DetailView):
     """Vista generica de los matenimientos realizados a un equipo"""
     # Mantenimiento.objects.get(pk=1)
     model = Mantenimiento
     template_name = 'mantenimiento/descripcion.html'
     context_object_name = 'descripcion_mantenimiento'
 
-class MantenimientoUpdate(generic.UpdateView):
+class MantenimientoUpdate(LoginRequiredMixin, generic.UpdateView):
     """Actualiza el registro de un equipo"""
     model = Mantenimiento
     form_class = MantenimientoForm
     template_name = 'mantenimiento/nuevo_mantenimiento.html'
     success_url = reverse_lazy('mantenimiento:index')
 
-class MantenimientoCreate(generic.CreateView):
+class MantenimientoCreate(LoginRequiredMixin, generic.CreateView):
     """Vista para agregar un registro de mantenimiento"""
     model = Mantenimiento
     form_class = MantenimientoForm
