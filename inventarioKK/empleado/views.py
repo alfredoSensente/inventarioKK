@@ -85,9 +85,6 @@ def EmpleadoPDF(request, id_empleado):
     pdf = render_to_pdf('empleado/pdf_empleado.html', data)
     return HttpResponse(pdf, content_type='application/pdf')
 
-def ErrorEmpleado(request):
-    return render(request, 'empleado/error.html')
-
 def generador(request):
     """
     Termina de generar codigo

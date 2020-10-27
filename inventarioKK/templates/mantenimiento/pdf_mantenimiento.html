@@ -1,0 +1,55 @@
+{% block title %}Descripcion{% endblock %}
+{% load static %}
+{% block body %}
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <!--Tabla-->
+                {% if descripcion_mantenimiento %}
+                <table class="table table-bordered table-hover table-dark text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Atributos</th>
+                        <th scope="col">Datos</th>
+                    </tr>
+                    </thead>
+                    <hr>
+                    <tbody>
+                
+                        <tr>
+                            <th scope="row">N° de Registro:</th> 
+                            <th>{{descripcion_mantenimiento.id_mantenimiento}}</th>      
+                        </tr>
+                        <tr>
+                            <th scope="row">Fecha:</th>
+                            <th>{{descripcion_mantenimiento.fecha}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Responsable:</th>
+                            <th>{{descripcion_mantenimiento.id_empleado}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Equipo:</th> 
+                            <th>{{descripcion_mantenimiento.id_equipo}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tipo de Mantenimiento:</th>
+                            <th>{{descripcion_mantenimiento.id_tipo_mantenimiento}}</th>
+                        </tr>
+                        
+                {% else %}
+                    <h1 class="text-center">No hay mantenimientos registrados</h1>
+                {% endif %}
+                    </tbody>
+                </table>
+                <hr>
+        </div>
+        <div>
+            <h1 class="text-right">Nucleus SV</h1>
+            <h3>{{fechaHora}}</h3>
+        </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

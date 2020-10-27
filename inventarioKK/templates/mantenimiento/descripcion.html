@@ -11,7 +11,7 @@
         <h3>Equipo: {{descripcion_mantenimiento.id_equipo}}</h3>
         <div class="row justify-content-md-center">
             <a type="button" class="btn btn-dark" href="{% url 'mantenimiento:index' %}">Regresar</a>
-            <a type="button" class="btn btn-dark" href="{% url 'mantenimiento:PDF' descripcion_mantenimiento.id_mantenimiento %}">Imprimir</a>
+            <a type="button" class="btn btn-dark" href="{% url 'mantenimiento:pdf_mantenimiento' descripcion_mantenimiento.id_mantenimiento %}">Imprimir</a>
         </div>
     {% else %}
         <h3>No hay mantenimientos!</h3>
