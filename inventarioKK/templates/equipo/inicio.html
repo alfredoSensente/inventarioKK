@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
-    <title>Onepage - clean responsive HTML5 themes - thomsoon.com</title>
+    <title>Nucleus Admin</title>
 
 		<meta name="description" content="Free download theme onepage, clean and modern responsive for all"/>
 		<meta name="keywords" content="responsive, html5, onepage, themes, template, clean layout, free web"/>
@@ -76,9 +76,9 @@
     <div class="logo"><img src="{% static 'img\cube.png' %}" alt="cubo" width="20" height="20" >Nucleus</div>
     
       <ul id="menu">
-        <li><a href="#about-us">EQUIPOS</a></li>
-        <li><a href="#portfolio">EMPLEADOS</a></li>
-        <li><a href="#contact">MANTENIMIENTO</a></li>
+        <li><a href="{% url 'equipo:lista_de_equipos' %}">EQUIPOS</a></li>
+        <li><a href="{% url 'empleado:mensaje_empleado' %}">EMPLEADOS</a></li>
+        <li><a href="{% url 'mantenimiento:index' %}">MANTENIMIENTO</a></li>
         
         <li> <span class="navbar-text">
             {% if user.is_authenticated %}
@@ -104,7 +104,7 @@
   
     <h1>NUESTRA MISION</h1>
     <hr/>
-    <p class="title">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+    <p class="title">LA ADMINISTRACION DE NUESTROS EQUIPOS Y RECURSOS ES PIONERA A NIVEL NACIONAL</p>
   
       <div class="column-one">
   
