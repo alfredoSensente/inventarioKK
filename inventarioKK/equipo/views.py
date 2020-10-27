@@ -21,6 +21,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import qrcode
 
 # Create your views here.
+class Inicio(LoginRequiredMixin, generic.ListView):
+    template_name= 'equipo/inicio.html'
+    context_object_name = 'lista_equipo'
+    model = Equipo
+
 class MyView(LoginRequiredMixin, View):
     login_url = '/login/'
     redirect_field_name = 'redirect_to'
