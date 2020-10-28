@@ -4,15 +4,14 @@
 {% block body %}
 
 <style>
-  .button{
-      transition-duration: 0.4s; 
-      border: 2px solid #000000;
-      border-radius: 12px;
-     }
-  .button:hover{
-    color: #999999;
-    background-color: #ffffff;
-  }
+  
+  
+  .search_submit{
+      
+      font-size: 15px;
+     
+    }
+  
   </style>
 
 <br>
@@ -23,10 +22,14 @@
 <div class="text-right">
 <form action="{% url 'mantenimiento:busqueda_mantenimiento' %}"  method="get">
     <input name="q" type="text" placeholder="Buscar mantenimiento...">
-    <button id="search_submit" type="submit reset">Buscar</button>
+    <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
 </form>
 </div>
 <br>
+
+        <div class="row justify-content-md-center text-right">
+            <button class="button button2 align-right"><a href="{% url 'mantenimiento:index' %}" style="color: white;">Regresar</a></button>
+        </div>
 
  <!--Tabla-->
     {% if object_list %}
@@ -61,6 +64,7 @@
 <div class="text-center">
 <h1>No hay coincidencias!</h1>
 <img src="{% static 'img\rocket.gif' %}" alt="cohete">
+
 </div>
 {% endif %}
 </tbody>

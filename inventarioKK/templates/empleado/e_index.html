@@ -2,7 +2,13 @@
 {% block title %}Empleado{% endblock %}
 {% load static %}
 {% block body %}
-
+<style>
+    .search_submit{
+      
+      font-size: 15px;
+     
+    }
+  </style>
 <br>
 <div class="container">
    
@@ -11,7 +17,7 @@
 <div class="text-right">
 <form action="{% url 'empleado:busqueda_empleado' %}"  method="get">
     <input name="q" type="text" placeholder="Buscar empleado...">
-    <button id="search_submit" type="submit reset">Buscar</button>
+    <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
 </form>
 </div>
 <br>
