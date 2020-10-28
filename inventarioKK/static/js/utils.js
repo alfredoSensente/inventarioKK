@@ -25,14 +25,14 @@ function PasarValor(valor1, valor2, codigo, URL){
 }
 function ObtenerCodigo(letra1, letra2, codigo, URL) {
     const csrftoken = getCookie('csrftoken');
-    console.log('llego a obtener codigo')
-    if (letra1!="" &&  letra2!="") {
+    console.log('llego a obtener codigo');
+    console.log(URL);
+    if (letra1!="" &&  letra2!="" && letra2!="-") {
         let letras = letra1 + '' + letra2;
         let data ={
                     'csrfmiddlewaretoken':csrftoken,
                     'letras':letras,
                     };
-        console.log(URL)
         $.post(URL, data, function(response){ 
                 document.getElementById(codigo).value = response
         });
@@ -70,4 +70,15 @@ function ObtenerCodigoSelected(letra1, letra2, letra3, codigo, URL) {
                 document.getElementById(codigo).value = response
         });
     }
+}
+
+//metodos para obtener codigo de Equipo
+function PasarValorBodega(valor1, valor2, codigo, URL){
+    let letra1 = document.getElementById(valor1).value.charAt(0);
+    var combo2 = document.getElementById(valor2);
+    var letra2 = combo2.options[combo2.selectedIndex].text.charAt(0);
+    
+    console.log(letra1);
+    console.log(letra2);
+    ObtenerCodigo(letra1, letra2, codigo, URL)
 }

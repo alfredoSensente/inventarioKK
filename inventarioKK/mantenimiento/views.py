@@ -6,8 +6,8 @@ from datetime import datetime
 from datetime import date
 from equipo.utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento
-from .forms import MantenimientoForm
+from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento, Bodega
+from .forms import MantenimientoForm, BodegaForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -78,9 +78,39 @@ def generador(request):
         print('llego')
         if 'letras' in request.POST:
             letras = request.POST['letras'].upper()
-            numero = str(Mantenimiento.objects.filter(id_mantenimiento__startswith=letras).count()+1).zfill(3)
-            anio = str(date.today().year)
-            codigo = letras+anio[:2]+numero
-            print(codigo)
+            anio = str(date.today().year)[:2]
+            numero = str(Mantenimiento.objects.filter(id_mantenimiento__startswith=letras+anio)
+                         .count()+1).zfill(3)
+            codigo = letras+anio+numero
+            return HttpResponse(codigo)
+    return HttpResponse('FAIL!!!!!')
+
+class BodegatoUpdate(LoginRequiredMixin, generic.UpdateView):
+    """Actualiza el registro de un equipo"""
+    model = Bodega
+    form_class = BodegaForm
+    template_name = 'mantenimiento/nuevo_bodega.html'
+    success_url = reverse_lazy('mantenimiento:index')
+
+class BodegatoCreate(LoginRequiredMixin, generic.CreateView):
+    """Vista para agregar un registro de mantenimiento"""
+    model = Bodega
+    form_class = BodegaForm
+    context_object_name = 'mantenimiento_objeto'
+    template_name = 'mantenimiento/nuevo_bodega.html'
+    success_url = reverse_lazy('mantenimiento:index')
+
+def generador_bodega(request):
+    """
+    Termina de generar codigo
+    """
+    if request.method == 'POST':
+        print('llego a obtener bodega')
+        if 'letras' in request.POST:
+            letras = request.POST['letras'].upper()
+            anio = str(date.today().year)[:2]
+            numero = str(Bodega.objects.filter(id_bodega__startswith=letras+anio)
+                         .count()+1).zfill(3)
+            codigo = letras+anio+numero
             return HttpResponse(codigo)
     return HttpResponse('FAIL!!!!!')
