@@ -115,10 +115,9 @@ def generador(request):
         print('llego')
         if 'letras' in request.POST:
             letras = request.POST['letras'].upper()
-            numero = str(Equipo.objects.filter(id_equipo__startswith=letras).count()+1).zfill(3)
-            anio = str(date.today().year)
-            codigo = letras+anio[:2]+numero
-            print(codigo)
+            anio = str(date.today().year)[:2]
+            numero = str(Equipo.objects.filter(id_equipo__startswith=letras+anio).count()+1).zfill(3)
+            codigo = letras+anio+numero
             return HttpResponse(codigo)
     return HttpResponse('FAIL!!!!!')
 
