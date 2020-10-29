@@ -2,6 +2,14 @@
 {% block title %}Resultados de la Busqueda{% endblock %}
 {% load static %}
 {% block body %}
+<style>
+
+  .search_submit{
+      
+      font-size: 15px;
+     
+    }
+</style>
 
 <br>
 <div class="container">
@@ -11,14 +19,16 @@
 <div class="text-right">
 <form action="{% url 'mantenimiento:busqueda_bodega' %}"  method="get">
     <input name="q" type="text" placeholder="Buscar recurso...">
-    <button id="search_submit" type="submit reset">Buscar</button>
+    <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
 </form>
 </div>
 <br>
-
+        <div class="row justify-content-md-center text-right">
+            <button class="button button2 align-right"><a href="{% url 'mantenimiento:index_bodega' %}" style="color: white;">Regresar</a></button>
+        </div>
  <!--Tabla-->
     {% if object_list %}
-    <table class="table table-bordered table-hover table-dark">
+    <table class="table table-bordered text-center table-hover table-dark">
         <thead>
           <tr>
             <th scope="col">N° de Registro</th>

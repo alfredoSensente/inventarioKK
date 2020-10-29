@@ -2,6 +2,14 @@
 {% load static %}
 {% block title %}Indice de Bodega{% endblock %}
 {% block body %}
+<style>
+
+  .search_submit{
+      
+      font-size: 15px;
+     
+    }
+</style>
 
 <br>
 <div class = 'container'>
@@ -9,10 +17,12 @@
   <div class = 'text-right'>
     <form action="{% url 'mantenimiento:busqueda_bodega' %}" method="get">
       <input name="q" type="text" placeholder="Buscar recursos...">
-      <button type="submit reset">Buscar</button>
+      <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
     </form>
   </div>
   <br>
+
+<!--Tabla-->
   {% if tabla_bodega %}
   <table class="table table-dark text-center table-hover">
       <thead>
