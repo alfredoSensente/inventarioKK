@@ -2,13 +2,21 @@
 {% load static %}
 {% block title %}Equipo{% endblock %}
 {% block body %}
+<style>
+  .search_submit{
+    
+    font-size: 15px;
+   
+  }
+</style>
+
 <br>
 <div class = 'container'>
     <h1 class="text-center">Equipos en Existencia</h1>
       <div class = 'text-right'>
         <form action="{% url 'equipo:busqueda_equipo' %}" method="get">
           <input name="q" type="text" placeholder="Buscar equipo...">
-          <button id="search_submit" type="submit reset">Buscar</button>
+          <button id="search_submit" type="submit reset" class="btn btn-dark search_submit">Buscar</button>
         </form>
       </div>
       <br>
@@ -42,9 +50,6 @@
     {% endif %}
         </tbody>
     </table>
-      <div class="row justify-content-md-center">
-        <button class="button button2 "><a href="{% url 'equipo:nuevo_equipo' %}" style="color:white">Agregar Equipo</a></button>
-      </div>
    <!--Paginación-->
       <div class="row justify-content-md-center">
         <ul class="pagination">

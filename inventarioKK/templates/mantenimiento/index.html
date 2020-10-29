@@ -13,6 +13,11 @@
   color: #999999;
   background-color: #ffffff;
 }
+.search_submit{
+      
+      font-size: 15px;
+     
+    }
 </style>
 
 <br>
@@ -21,7 +26,7 @@
   <div class = 'text-right'>
     <form action="{% url 'mantenimiento:busqueda_mantenimiento' %}" method="get">
       <input name="q" type="text" placeholder="Buscar Mantenimientos...">
-      <button type="submit reset">Buscar</button>
+      <button type="submit reset" class="btn btn-dark search_submit">Buscar</button>
     </form>
   </div>
   <br>

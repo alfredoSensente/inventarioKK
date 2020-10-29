@@ -40,7 +40,7 @@ class CrearEmpleado(LoginRequiredMixin, generic.CreateView):
             return HttpResponseRedirect(reverse_lazy('empleado:mensaje_empleado'))
         else:
             return render(request, 'empleado/nuevo_empleado.html',
-                          {'form': form, 'error_date': 'Estas intentando contratar a un menor, pervertido!'})
+                          {'form': form, 'error_date': 'Debes ingresar una fecha válida'})
 
 class EditarEmpleado(LoginRequiredMixin, generic.UpdateView):
     """Actualiza el registro de un Empleado"""
