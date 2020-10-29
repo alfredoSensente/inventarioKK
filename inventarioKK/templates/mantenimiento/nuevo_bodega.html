@@ -1,15 +1,15 @@
 {% extends "mantenimiento/layout_base_mantenimiento.html"%}
 {% load static %}
-{% block title %}Mantenimiento{% endblock %}
+{% block title %}Nuevo en Bodega{% endblock %}
 {% block body %}
     <div class="container margen-arriba">
         <form method="post">
             {% csrf_token %}
-            <!-- Codigo Mantenimiento -->
+            <!-- Codigo Bodega -->
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-2">
-                        <label for="id_tipo_equipo">Codigo:</label>
+                        <label for="id_tipo_equipo">Código:</label>
                     </div>
                     <div class="col-md-6">
                         {{form.id_bodega}}
@@ -20,14 +20,14 @@
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-2">
-                        <label for="fecha">Nombre Recurso:</label>
+                        <label for="fecha">Nombre del Recurso:</label>
                     </div>
                     <div class="col-md-6">
                         {{form.nombre_recurso}}
                     </div>
                 </div>
             </div>
-            <!-- Descripcion Mantenimiento -->
+            <!-- Descripcion Bodega -->
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-2">
@@ -41,15 +41,18 @@
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-2">
-                        <label for="fecha">Tipo de Mantenimiento:</label>
+                        <label for="fecha">Tipo de Recurso:</label>
                     </div>
                     <div class="col-md-6">
                         {{form.id_tipo_recurso}}
                     </div>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+            <div class="row justify-content-md-center margen-arriba">
+                <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+                <button class="button button1"><a href="{% url 'mantenimiento:index_bodega' %}" style="color:white">Cancelar</a></button>
+                <button type="reset" class="button button2" value="Resetear">Reiniciar</button>
+            </div>
         </form>
     </div>
-    {% endblock %}
+{% endblock %}

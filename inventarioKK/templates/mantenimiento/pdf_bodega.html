@@ -1,0 +1,51 @@
+{% block title %}Descripcion{% endblock %}
+{% load static %}
+{% block body %}
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-5">
+                <!--Tabla-->
+                {% if descripcion_bodega %}
+                <table class="table table-bordered table-hover table-dark text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Atributos</th>
+                        <th scope="col">Datos</th>
+                    </tr>
+                    </thead>
+                    <hr>
+                    <tbody>
+                
+                        <tr>
+                            <th scope="row">Código:</th> 
+                            <th>{{descripcion_bodega.id_bodega}}</th>      
+                        </tr>
+                        <tr>
+                            <th scope="row">Nombre:</th>
+                            <th>{{descripcion_bodega.nombre_recurso}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Descripción:</th>
+                            <th>{{descripcion_bodega.descripcion}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tipo de Recurso:</th>
+                            <th>{{descripcion_bodega.id_tipo_recurso}}</th>
+                        </tr>
+                        
+                {% else %}
+                    <h1 class="text-center">No hay recursos registrados</h1>
+                {% endif %}
+                    </tbody>
+                </table>
+                <hr>
+        </div>
+        <div>
+            <h1 class="text-right">Nucleus SV</h1>
+            <h3>{{fechaHora}}</h3>
+        </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

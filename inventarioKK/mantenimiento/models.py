@@ -22,7 +22,7 @@ class Mantenimiento(models.Model):
     """Modelo mantenimiento que utilizar modelo equipo importado de la app equipo"""
     id_mantenimiento = models.CharField(primary_key=True, max_length=8)
     fecha = models.DateField()
-    descripcion = models.CharField(max_length= 45)
+    descripcion = models.CharField(max_length=60)
     id_empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, db_column='id_empleado')
     id_equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, db_column='id_equipo')
     id_tipo_mantenimiento = models.ForeignKey(TipoMantenimiento, on_delete=models.CASCADE, db_column='id_tipo_mantenimiento')
@@ -49,9 +49,9 @@ class TipoRecurso(models.Model):
 class Bodega(models.Model):
     """Modelo para Bodega"""
     id_bodega = models.CharField(primary_key=True, max_length=7)
-    nombre_recurso = models.CharField(max_length=45)
-    descripcion = models.CharField(max_length=45, blank=True, null= True)
-    id_tipo_recurso = models.ForeignKey(TipoRecurso, on_delete=models.CASCADE, db_column= 'id_tipo_recurso')
+    nombre_recurso = models.CharField(max_length=60)
+    descripcion = models.CharField(max_length=45, blank=True, null=True)
+    id_tipo_recurso = models.ForeignKey(TipoRecurso, on_delete=models.CASCADE, db_column='id_tipo_recurso')
 
     class Meta:
         managed = True

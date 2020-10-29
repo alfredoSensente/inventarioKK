@@ -85,20 +85,63 @@ def generador(request):
             return HttpResponse(codigo)
     return HttpResponse('FAIL!!!!!')
 
+class BodegaIndex(LoginRequiredMixin, generic.ListView):
+    """Vista generica del Indice de la Bodega"""
+    # Bodega.objects.all()
+    paginate_by = 5
+    template_name = 'mantenimiento/index_bodega.html'
+    context_object_name = 'tabla_bodega'
+    model = Bodega
+
+class BodegaDescripcion(LoginRequiredMixin, generic.DetailView):
+    """Vista generica de los detalles del recurso en bodega seleccionado"""
+    # Bodega.objects.get(pk=1)
+    model = Bodega
+    template_name = 'mantenimiento/detalle_bodega.html'
+    context_object_name = 'descripcion_bodega'
+
 class BodegatoUpdate(LoginRequiredMixin, generic.UpdateView):
-    """Actualiza el registro de un equipo"""
+    """Actualiza el registro de un recurso en bodega"""
     model = Bodega
     form_class = BodegaForm
     template_name = 'mantenimiento/nuevo_bodega.html'
-    success_url = reverse_lazy('mantenimiento:index')
+    success_url = reverse_lazy('mantenimiento:index_bodega')
 
 class BodegatoCreate(LoginRequiredMixin, generic.CreateView):
-    """Vista para agregar un registro de mantenimiento"""
+    """Vista para agregar un registro en bodega"""
     model = Bodega
     form_class = BodegaForm
     context_object_name = 'mantenimiento_objeto'
     template_name = 'mantenimiento/nuevo_bodega.html'
-    success_url = reverse_lazy('mantenimiento:index')
+    success_url = reverse_lazy('mantenimiento:index_bodega')
+
+class BodegaBusqueda(LoginRequiredMixin, generic.ListView):
+    """Busca un Recurso en Bodega"""
+    model = Bodega
+    context_object_name = 'bodega_objeto'
+    template_name = 'mantenimiento/busqueda_bodega.html'
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Bodega.objects.filter(
+            Q(id_bodega__icontains=query) | Q(nombre_recurso__icontains=query) | 
+            Q(descripcion__icontains=query) | Q(id_tipo_recurso__nombre_tipo_recurso__icontains=query)
+        ) 
+        return object_list
+
+def BodegaPDF(request, id_bodega):
+    """Muestra al Recurso en Bodega seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
+    descripcion_bodega = Bodega.objects.get(pk=id_bodega)
+    hora = datetime.now()
+    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
+    data = {
+            'descripcion_bodega': descripcion_bodega,
+            'fechaHora' : hora,
+            
+        }
+    pdf = render_to_pdf('mantenimiento/pdf_bodega.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')
+
 
 def generador_bodega(request):
     """

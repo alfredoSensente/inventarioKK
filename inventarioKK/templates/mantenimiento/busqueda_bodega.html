@@ -1,0 +1,55 @@
+{% extends "mantenimiento/layout_base_mantenimiento.html"%}
+{% block title %}Resultados de la Busqueda{% endblock %}
+{% load static %}
+{% block body %}
+
+<br>
+<div class="container">
+   
+    <h1 class="text-center">Resultados de la Búsqueda</h1>
+    <!--SearchBox con su respectivo Botón-->
+<div class="text-right">
+<form action="{% url 'mantenimiento:busqueda_bodega' %}"  method="get">
+    <input name="q" type="text" placeholder="Buscar recurso...">
+    <button id="search_submit" type="submit reset">Buscar</button>
+</form>
+</div>
+<br>
+
+ <!--Tabla-->
+    {% if object_list %}
+    <table class="table table-bordered table-hover table-dark">
+        <thead>
+          <tr>
+            <th scope="col">N° de Registro</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Tipo de Recurso</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+
+    {% for recurso in object_list %}
+        
+    <tr>
+      <th scope="row">{{recurso.id_bodega}}</th>
+      <td>{{recurso.nombre_recurso}}</td>
+      <td>{{recurso.descripcion}}</td>
+      <td>{{recurso.id_tipo_recurso}}</td>
+      <td><a href="{% url 'mantenimiento:descripcion_bodega' recurso.id_bodega %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+          <a href="{% url 'mantenimiento:editar_bodega' recurso.id_bodega %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+          
+      </td>
+    </tr>
+    {% endfor %}
+{% else %}
+<div class="text-center">
+<h1>No hay coincidencias!</h1>
+<img src="{% static 'img\rocket.gif' %}" alt="cohete">
+</div>
+{% endif %}
+</tbody>
+</table>
+    </div>
+{% endblock %}

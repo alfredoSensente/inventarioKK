@@ -1,0 +1,91 @@
+{% extends "mantenimiento/layout_base_mantenimiento.html"%}
+{% load static %}
+{% block title %}Indice de Bodega{% endblock %}
+{% block body %}
+
+<br>
+<div class = 'container'>
+  <h1 class="text-center">Recursos en Bodega</h1>
+  <div class = 'text-right'>
+    <form action="{% url 'mantenimiento:busqueda_bodega' %}" method="get">
+      <input name="q" type="text" placeholder="Buscar recursos...">
+      <button type="submit reset">Buscar</button>
+    </form>
+  </div>
+  <br>
+  {% if tabla_bodega %}
+  <table class="table table-dark text-center table-hover">
+      <thead>
+        <tr>
+          <th scope="col">N° de Registro</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Tipo de Recurso</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tabla in tabla_bodega %}
+        <tr>
+          <th scope="row">{{tabla.id_bodega}}</th>
+          <td>{{tabla.nombre_recurso}}</td>
+          <td>{{tabla.descripcion}}</td>
+          <td>{{tabla.id_tipo_recurso}}</td>
+          <td>
+            <a href="{% url 'mantenimiento:descripcion_bodega' tabla.id_bodega %}"><img src="{% static 'bootstrap/icons/info-circle.svg' %}" alt="My image" width="30px"></a>
+            <a href="{% url 'mantenimiento:editar_bodega' tabla.id_bodega %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+  {% else %}
+  <p>No hay recursos en bodega!</p>
+  {% endif %}
+
+    <!--Paginación-->
+    <div class="row justify-content-md-center">
+      <ul class="pagination">
+      {% if page_obj.has_previous %}
+          <li class="page-item">
+              <a class="page-link" href="?page=1" aria-label="Previous">
+                  Primera
+              </a>
+          </li>
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+              </a>
+          </li>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+          {% ifequal num page_obj.number %}
+          <li class="page-item active" aria-current="page">
+              <a class="page-link current">
+                  {{ num }}
+                  <span class="sr-only">(current)</span>
+              </a>
+          </li>
+          {% else %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          </li>
+          {% endifequal %} 
+      {% endfor %}        
+
+      {% if page_obj.has_next %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Previous">
+                  <span aria-hidden="true">&raquo;</span>
+              </a>
+          </li>
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Previous">
+                  Última
+              </a>
+          </li>
+      {% endif %}
+      </ul>
+  </div>
+</div>
+{% endblock %}
