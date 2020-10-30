@@ -13,3 +13,5 @@ admin.site.register(TipoMantenimiento)
 admin.site.register(Bodega)
 admin.site.register(TipoRecurso)
 admin.site.register(MantenimientoPorBodega)
+
+

@@ -1,0 +1,43 @@
+{% extends "mantenimiento/layout_base_mantenimiento.html"%}
+{% load static %}
+{% block title %}Nuevo Recurso{% endblock %}
+{% block body %}
+    <div class="container margen-arriba">
+        <form method="post">
+            {% csrf_token %}
+        <h1 class="text-center">Recursos para mantenimiento</h1>
+        <br>
+        <h5>Seleccione un registro de mantenimiento y los recursos necesarios para llevarlo a cabo</h5>
+        <br>
+            <!-- Codigo Bodega -->
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="id_tipo_equipo">Registro de mantenimiento:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.id_mantenimiento}}
+                    </div>
+                </div>
+            </div>
+            <!-- Nombre Recurso -->
+            
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-2">
+                        <label for="fecha">Tipo de Recurso:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{form.id_bodega}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-md-center margen-arriba">
+                <button type="submit" class="btn btn-primary" value="Agregar">Guardar</button>
+                <button type="reset" class="button button2" value="Resetear">Reiniciar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

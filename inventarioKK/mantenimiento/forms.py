@@ -1,6 +1,6 @@
-"""Formularios de la app Mantenimiento"""
+"""Formularios de la app """
 from django import forms
-from .models import Mantenimiento, Bodega
+from .models import Mantenimiento, Bodega, MantenimientoPorBodega
 
 class MantenimientoForm(forms.ModelForm):
     """
@@ -95,4 +95,32 @@ class BodegaForm(forms.ModelForm):
                                                   'name':'id_tipo_recurso',
                                                   'id':'id_tipo_recurso',
                                                   'onchange':'PasarValorBodega("nombre_recurso", "id_tipo_recurso", "id_bodega","/mantenimiento/generador_bodega/")'}),
+        }
+
+class MantenimientoPorBodegaForm(forms.ModelForm):
+     class Meta:
+        """
+        Especificaciones
+        """
+        model = MantenimientoPorBodega
+
+        fields = [
+            'id_mantenimiento_por_bodega',
+            'id_mantenimiento',
+            'id_bodega',
+        ]
+        labels = {
+            'id_mantenimiento_por_bodega':'Codigo',
+            'id_mantenimiento':'Codigo de mantenimiento',
+            'id_bodega':'Codigo de bodega',
+        }
+        widgets = {
+            'id_mantenimiento':forms.Select(attrs={'class':'custom-select',
+                                                        'name':'id_mantenimiento',
+                                                        'id':'id_mantenimiento',
+                                                        }),
+                'id_bodega':forms.Select(attrs={'class':'choice-in-line',
+                                                  'name':'id_bodega',
+                                                  'id':'id_bodega',
+                                                  }),
         }

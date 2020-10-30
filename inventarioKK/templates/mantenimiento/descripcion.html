@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Descripcion Mantenimiento{% endblock %}
 {% block body %}
+<h1 class="text-center">Detalles de Mantenimiento</h1>
 <br>
 <div class="container">
     <div class="row justify-content-md-center">
@@ -41,6 +42,20 @@
                             <th scope="row">Equipo:</th>
                             <td>{{descripcion_mantenimiento.id_equipo}}</td>
                         </tr>
+                    {% if descripcion_mantenimiento.mantenimientoporbodega_set.all %}
+                    {% for recurso in descripcion_mantenimiento.mantenimientoporbodega_set.all %}
+                        <tr>
+                            <th scope="row">Recurso #{{forloop.counter}}:</th>
+                            <td>{{recurso.id_bodega}}</td>
+                        </tr>
+                    {% endfor %}
+                    {% else %}
+                        <tr>
+                            <th scope="row">Recursos:</th>
+                            <td>No Asignados</td>
+                        </tr>
+                    {% endif %}
+
                         <tr>
                             <th scope="row">Acciones:</th>
                             <td><a href="{% url 'mantenimiento:editar' descripcion_mantenimiento.id_mantenimiento %}"><img src="{% static 'bootstrap/icons/pencil-square.svg' %}" alt="My image" width="30px"></a>

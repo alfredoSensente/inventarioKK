@@ -13,6 +13,7 @@ urlpatterns = [
     path('index_bodega/', views.BodegaIndex.as_view(), name='index_bodega'),
     path('nuevo_bodega/', views.BodegatoCreate.as_view(), name='nuevo_bodega'),
     path('busqueda_bodega/', views.BodegaBusqueda.as_view(), name='busqueda_bodega'),
+    path('nuevo_mantenimientoporbodega/', views.MantenimientoPorBodegaCreate.as_view(), name='nuevo_mantenimientoporbodega'),
     path('editar_mantenimiento/<str:pk>/', views.MantenimientoUpdate.as_view(), name='editar'),
     path('descripcion_mantenimiento/<str:pk>/', views.DescripcionMatenimiento.as_view(), name='descripcion'),
     path('<str:pk>/', views.DescripcionMatenimiento.as_view(), name='descripcion'),
@@ -20,6 +21,7 @@ urlpatterns = [
     path('editar_bodega/<str:pk>/', views.BodegatoUpdate.as_view(), name='editar_bodega'),
     path('descripcion_bodega/<str:pk>/', views.BodegaDescripcion.as_view(), name='descripcion_bodega'),
     path('<str:id_bodega>/pdf_bodega/', views.BodegaPDF, name='pdf_bodega'),
+    
 
 
 ]

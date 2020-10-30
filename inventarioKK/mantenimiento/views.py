@@ -6,8 +6,8 @@ from datetime import datetime
 from datetime import date
 from equipo.utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento, Bodega
-from .forms import MantenimientoForm, BodegaForm
+from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento, Bodega, MantenimientoPorBodega
+from .forms import MantenimientoForm, BodegaForm, MantenimientoPorBodegaForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -157,3 +157,13 @@ def generador_bodega(request):
             codigo = letras+anio+numero
             return HttpResponse(codigo)
     return HttpResponse('FAIL!!!!!')
+
+class MantenimientoPorBodegaCreate(LoginRequiredMixin, generic.CreateView):
+    """
+    crea mantenimientos por bodega
+    """
+    model = MantenimientoPorBodega
+    form_class = MantenimientoPorBodegaForm
+    context_object_name = 'mantenimientoporbodega_objeto'
+    template_name = 'mantenimiento/nuevo_mantenimientoporbodega.html'
+    success_url = reverse_lazy('mantenimiento:index')

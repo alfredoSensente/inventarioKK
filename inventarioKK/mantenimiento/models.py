@@ -32,7 +32,7 @@ class Mantenimiento(models.Model):
         db_table = 'mantenimiento'
 
     def __str__(self):
-        return str(self.id_empleado) + " - " + str(self.id_equipo.id_tipo_equipo.nombre_tipo_equipo)
+        return str(self.id_mantenimiento) + " - " + str(self.id_equipo.id_tipo_equipo.nombre_tipo_equipo) + " - " + str(self.id_empleado.nombre) + " " + str(self.id_empleado.apellido)
 
 class TipoRecurso(models.Model):
     """Modelo para Tipo de Recurso"""
