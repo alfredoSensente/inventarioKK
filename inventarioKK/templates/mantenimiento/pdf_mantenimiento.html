@@ -41,6 +41,20 @@
                             <th scope="row">Tipo de Mantenimiento:</th>
                             <th>{{descripcion_mantenimiento.id_tipo_mantenimiento}}</th>
                         </tr>
+                            {% if descripcion_mantenimiento.mantenimientoporbodega_set.all %}
+                            {% for recurso in descripcion_mantenimiento.mantenimientoporbodega_set.all %}
+                                <tr>
+                                    <th scope="row">Recurso #{{forloop.counter}}:</th>
+                                    <th>{{recurso.id_bodega}}</th>
+                                </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <th scope="row">Recursos:</th>
+                                    <td>No Asignados</td>
+                                </tr>
+                            {% endif %}
+                        
                         
                 {% else %}
                     <h1 class="text-center">No hay mantenimientos registrados</h1>
