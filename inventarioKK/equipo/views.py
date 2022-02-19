@@ -5,7 +5,6 @@ from .forms import EquipoForm
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponse
-from .utils import render_to_pdf
 from datetime import datetime
 from datetime import date
 from django.contrib.auth import authenticate, login, logout
@@ -18,7 +17,6 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-import qrcode
 
 # Create your views here.
 class Inicio(LoginRequiredMixin, generic.ListView):
@@ -72,33 +70,21 @@ class BusquedaEquipo(LoginRequiredMixin, generic.ListView):
         )
         return object_list
 
-def PDF(request, id_equipo):
-    """Muestra al Equipo seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
-    descripcion_equipo = Equipo.objects.get(pk=id_equipo)
-    hora = datetime.now()
-    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
-    data = {
-            'descripcion_equipo': descripcion_equipo,
-            'fechaHora' : hora,
-            
-        }
-    pdf = render_to_pdf('equipo/lista.html', data)
-    return HttpResponse(pdf, content_type='application/pdf')
 
 def loginpage(request):
     userlogin = "admin"
     passw = "admin"
     if request.method == 'POST':
-    		username = request.POST.get('username')
-    		password = request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-    		
+        
 
-    		if userlogin == username and passw == password:
-    			"""login(request, user)"""
-    			return redirect('equipo:lista_de_equipos')
-    		else:
-    			messages.info(request, 'Usuario o contraseña incorrectos')
+        if userlogin == username and passw == password:
+            """login(request, user)"""
+            return redirect('equipo:lista_de_equipos')
+        else:
+            messages.info(request, 'Usuario o contraseña incorrectos')
 
     context = {}
     return render(request, 'equipo/login.html', context)

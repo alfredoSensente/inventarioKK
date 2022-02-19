@@ -10,5 +10,4 @@ urlpatterns = [
     path('<str:pk>/', views.DescripcionEmpleado.as_view(), name='des_em'),
     path('editar_empleado/<str:pk>/', views.EditarEmpleado.as_view(), name='editar_empleado'),
     path('eliminar_empleado/<str:pk>/', views.EliminarEmpleado.as_view(), name='eliminar_empleado'),
-    path('<str:id_empleado>/EmpleadoPDF/', views.EmpleadoPDF, name='EmpleadoPDF'),
 ]

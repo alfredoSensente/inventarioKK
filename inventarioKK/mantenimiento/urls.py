@@ -17,10 +17,8 @@ urlpatterns = [
     path('editar_mantenimiento/<str:pk>/', views.MantenimientoUpdate.as_view(), name='editar'),
     path('descripcion_mantenimiento/<str:pk>/', views.DescripcionMatenimiento.as_view(), name='descripcion'),
     path('<str:pk>/', views.DescripcionMatenimiento.as_view(), name='descripcion'),
-    path('<str:id_mantenimiento>/pdf_mantenimiento/', views.PDF, name='pdf_mantenimiento'),
     path('editar_bodega/<str:pk>/', views.BodegatoUpdate.as_view(), name='editar_bodega'),
     path('descripcion_bodega/<str:pk>/', views.BodegaDescripcion.as_view(), name='descripcion_bodega'),
-    path('<str:id_bodega>/pdf_bodega/', views.BodegaPDF, name='pdf_bodega'),
     
 
 

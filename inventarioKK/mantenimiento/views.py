@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from datetime import datetime
 from datetime import date
-from equipo.utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Mantenimiento, Empleado, Equipo, TipoMantenimiento, Bodega, MantenimientoPorBodega
 from .forms import MantenimientoForm, BodegaForm, MantenimientoPorBodegaForm
@@ -56,19 +55,6 @@ class BusquedaMantenimiento(LoginRequiredMixin, generic.ListView):
             Q(id_empleado__nombre__icontains=query)
         ) 
         return object_list
-
-def PDF(request, id_mantenimiento):
-    """Muestra al Mantenimiento seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
-    descripcion_mantenimiento = Mantenimiento.objects.get(pk=id_mantenimiento)
-    hora = datetime.now()
-    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
-    data = {
-            'descripcion_mantenimiento': descripcion_mantenimiento,
-            'fechaHora' : hora,
-            
-        }
-    pdf = render_to_pdf('mantenimiento/pdf_mantenimiento.html', data)
-    return HttpResponse(pdf, content_type='application/pdf')
 
 def generador(request):
     """

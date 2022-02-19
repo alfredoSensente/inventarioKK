@@ -5,7 +5,6 @@ from django.db.models import Q
 from .models import Empleado
 from .forms import EmpleadoForm
 from django.shortcuts import render
-from .utils import render_to_pdf
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 from datetime import date
@@ -71,19 +70,6 @@ class BusquedaEmpleado(LoginRequiredMixin, generic.ListView):
            Q(id_ubicacion__id_edificio__nombre_edificio__icontains=query)
         )
         return object_list
-
-def EmpleadoPDF(request, id_empleado):
-    """Muestra al Empleado seleccionado en un PDF y las opciones de Guardar dicho PDF y/o Imprimirlo"""
-    descripcion_empleado = Empleado.objects.get(pk=id_empleado)
-    hora = datetime.now()
-    """format = hora.strftime('Día :%d, Mes: %m, Año: %Y, Hora: %H, Minutos: %M')"""
-    data = {
-            'descripcion_empleado': descripcion_empleado,
-            'fechaHora' : hora,
-            
-        }
-    pdf = render_to_pdf('empleado/pdf_empleado.html', data)
-    return HttpResponse(pdf, content_type='application/pdf')
 
 def generador(request):
     """
